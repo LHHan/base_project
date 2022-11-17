@@ -13,7 +13,7 @@ class Env {
   factory Env.dev() {
     return Env._(
       envType: EnvType.dev,
-      apiBaseUrl: '',
+      apiBaseUrl: 'dev',
     );
   }
 
@@ -21,7 +21,7 @@ class Env {
   factory Env.prod() {
     return Env._(
       envType: EnvType.prod,
-      apiBaseUrl: '',
+      apiBaseUrl: 'prod',
     );
   }
 

@@ -1,3 +1,5 @@
+import 'package:base_project_getx/app/core/utils/app_config.dart';
+import 'package:base_project_getx/app/core/values/app_enum.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,11 +16,12 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Center(
+          Center(
             child: Text(
-              'HomeView is working',
-              style: TextStyle(fontSize: 20),
+              AppConfig.I.env.envType == EnvType.dev ? 'DEV' : 'PROD',
+              style: const TextStyle(fontSize: 20),
             ),
           ),
           ElevatedButton(
