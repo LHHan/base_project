@@ -44,5 +44,5 @@ class AppConfig {
   static final AppConfig I = AppConfig._private();
 
   Env env = Env.dev();
-  AppTheme theme = AppTheme.origin();
+  AppTheme theme = AppTheme();
 }

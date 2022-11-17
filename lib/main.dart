@@ -5,6 +5,6 @@ import 'app/core/utils/app_config.dart';
 
 Future<void> main() async {
   /// Init dev config
-  AppConfig(env: Env.dev(), theme: AppTheme.origin());
+  AppConfig(env: Env.dev(), theme: AppTheme());
   await myMain();
 }

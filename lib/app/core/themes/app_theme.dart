@@ -4,23 +4,24 @@ import '../values/app_asset.dart';
 import '../values/app_colors.dart';
 
 class AppTheme {
-  AppTheme._();
+  static final AppTheme _singleton = AppTheme._internal();
 
-  /// Default theme
-  factory AppTheme.origin() {
-    return AppTheme._();
+  factory AppTheme() {
+    return _singleton;
   }
+
+  AppTheme._internal();
 
   /// Light theme
   ThemeData light = ThemeData(
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light().copyWith(
-      primary: AppColors.origin().colorBackground,
+      primary: AppColors().colorBackground,
       onPrimary: Colors.white,
       secondary: Colors.black,
       onSecondary: Colors.blue,
     ),
-    fontFamily: AppAssets.origin().fontLato,
+    fontFamily: AppAssets().fontLato,
     textTheme: const TextTheme(
       headline1: TextStyle(
         color: Colors.black,

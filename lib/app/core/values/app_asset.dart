@@ -1,10 +1,11 @@
 class AppAssets {
-  AppAssets._();
+  static final AppAssets _singleton = AppAssets._internal();
 
-  /// Default theme
-  factory AppAssets.origin() {
-    return AppAssets._();
+  factory AppAssets() {
+    return _singleton;
   }
+
+  AppAssets._internal();
 
   /// #region Font
   /// -----------------
@@ -13,7 +14,7 @@ class AppAssets {
 
   /// #region Icon
   /// -----------------
-  String icAppIcon = 'assets/base/icons/app_icon_ad.png';
+  String icAppIcon = 'assets/base/icons/ic_app_icon.png';
   String icEmpty = 'assets/base/icons/ic_empty.png';
 
   /// #region Image, Video

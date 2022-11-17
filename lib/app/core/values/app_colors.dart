@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  AppColors._();
+  static final AppColors _singleton = AppColors._internal();
 
-  factory AppColors.origin() {
-    return AppColors._();
+  factory AppColors() {
+    return _singleton;
   }
+
+  AppColors._internal();
 
   Color colorBackground = const Color(0xFFFAFAFA);
   Color colorMainText = const Color(0xFF202020);
