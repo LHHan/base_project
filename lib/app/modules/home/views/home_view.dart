@@ -23,6 +23,7 @@ class HomeView extends GetView<HomeController> {
           ),
           ElevatedButton(
             onPressed: controller.onPressed,
+            onLongPress: controller.onLongPressed,
             child: const Text("Button"),
           ),
         ],
