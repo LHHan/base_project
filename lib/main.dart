@@ -42,10 +42,10 @@ Future<void> _loadEnvironment() async {
   String? flavor =
       await const MethodChannel('flavor').invokeMethod<String>('getFlavor');
 
-  if (flavor == 'development') {
+  if (flavor == 'dev') {
     AppConfig(env: Env.dev(), theme: AppTheme());
     logger.i('Started with flavor $flavor!');
-  } else if (flavor == 'production') {
+  } else if (flavor == 'prod') {
     AppConfig(env: Env.prod(), theme: AppTheme());
     logger.i('Started with flavor $flavor!');
   } else {

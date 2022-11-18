@@ -45,12 +45,12 @@ android {
     flavorDimensions "flavors"
 
     productFlavors {
-        development {
+        dev {
             dimension "flavors"
             applicationIdSuffix ".dev"
             manifestPlaceholders = [appName: "[Dev] Base Project"]
         }
-        production {
+        prod {
             dimension "flavors"
             applicationIdSuffix ""
             manifestPlaceholders = [appName: "Base Project"]
