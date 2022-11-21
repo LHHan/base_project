@@ -1,5 +1,6 @@
 import 'package:base_project_getx/app/core/utils/app_log.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       theme: AppTheme().light,
+      darkTheme: AppTheme().dark,
+      themeMode: ThemeMode.system,
     );
   }
 }
