@@ -1,6 +1,9 @@
 import 'package:base_project_getx/app/core/utils/app_config.dart';
 import 'package:base_project_getx/app/core/utils/app_log.dart';
+import 'package:base_project_getx/app/core/values/app_asset.dart';
+import 'package:base_project_getx/app/core/values/app_colors.dart';
 import 'package:base_project_getx/app/core/values/app_enum.dart';
+import 'package:base_project_getx/app/core/values/app_style.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -23,7 +26,10 @@ class HomeView extends GetView<HomeController> {
             Center(
               child: Text(
                 AppConfig.I.env.envType == EnvType.dev ? 'DEV' : 'PROD',
-                style: const TextStyle(fontSize: 20),
+                style: AppStyles().normalTextStyle(
+                  20,
+                  // color: AppColors().colorMainText,
+                ),
               ),
             ),
             Card(
@@ -37,11 +43,14 @@ class HomeView extends GetView<HomeController> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    const Expanded(
-                      child: Text("Change Theme Mode"),
+                    Expanded(
+                      child: Text(
+                        "Change App Theme",
+                        style: AppStyles().normalTextStyle(18),
+                      ),
                     ),
                     GetBuilder(
-                      id: 'ChangeThemeMode',
+                      id: 'ChangeAppTheme',
                       init: controller,
                       builder: (control) {
                         return IconButton(

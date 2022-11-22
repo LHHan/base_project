@@ -10,6 +10,6 @@ class AppColors {
   AppColors._internal();
 
   Color colorBackground = const Color(0xFFFAFAFA);
-  Color colorMainText = const Color(0xFF202020);
+  Color colorMainText = const Color(0xFF000000);
   Color colorHintText = const Color(0xFFD5D5D6);
 }

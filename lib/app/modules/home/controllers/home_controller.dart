@@ -6,7 +6,6 @@ import '../../../core/utils/app_log.dart';
 class HomeController extends GetxController {
   /// #Define variables
   bool isDark = Get.isDarkMode;
-  var testText = 'cc'.obs;
 
   /// #Define functions
   void onChangeAppTheme() {
@@ -14,6 +13,7 @@ class HomeController extends GetxController {
         ? Get.changeTheme(AppTheme().light)
         : Get.changeTheme(AppTheme().dark);
     isDark = !isDark;
-    update(['ChangeThemeMode']);
+    update(['ChangeAppTheme']);
+    logger.i('Changed App Theme to \'${isDark ? 'dark' : 'light'}\'');
   }
 }
