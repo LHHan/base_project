@@ -23,15 +23,16 @@ class HomeView extends GetView<HomeController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Spacer(),
             Center(
               child: Text(
-                AppConfig.I.env.envType == EnvType.dev ? 'DEV' : 'PROD',
-                style: AppStyles().normalTextStyle(
-                  20,
-                  // color: AppColors().colorMainText,
-                ),
+                '${'hello'.tr} ${AppConfig.I.env.envType == EnvType.dev ? 'DEV' : 'PROD'}',
+                style: AppStyles().normalTextStyle(20),
               ),
             ),
+            Spacer(),
+
+            /// Change App Theme Card
             Card(
               elevation: 4,
               semanticContainer: true,
@@ -39,18 +40,19 @@ class HomeView extends GetView<HomeController> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Padding(
+              child: Container(
                 padding: const EdgeInsets.all(8.0),
+                constraints: const BoxConstraints(minHeight: 65),
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
-                        "Change App Theme",
+                        'changeAppTheme'.tr,
                         style: AppStyles().normalTextStyle(18),
                       ),
                     ),
                     GetBuilder(
-                      id: 'ChangeAppTheme',
+                      id: 'changeAppTheme',
                       init: controller,
                       builder: (control) {
                         return IconButton(
@@ -62,6 +64,51 @@ class HomeView extends GetView<HomeController> {
                           ),
                         );
                       },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 50),
+
+            /// Change App Locale Card
+            Card(
+              elevation: 4,
+              semanticContainer: true,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                constraints: BoxConstraints(minHeight: 65, minWidth: Get.width),
+                child: Stack(
+                  alignment: Alignment.centerLeft,
+                  children: [
+                    Text(
+                      'changeAppLocale'.tr,
+                      style: AppStyles().normalTextStyle(18),
+                    ),
+                    Positioned(
+                      right: -13,
+                      child: InkWell(
+                        onTap: controller.onChangeAppLocale,
+                        borderRadius: BorderRadius.circular(55),
+                        child: Padding(
+                          padding: const EdgeInsets.all(22),
+                          child: GetBuilder(
+                            id: 'changeAppLocale',
+                            init: controller,
+                            builder: (control) => Image.asset(
+                              controller.selectedLocale == LocaleCode.en.name
+                                  ? AppAssets().imFlagEn
+                                  : AppAssets().imFlagVi,
+                              width: 25,
+                              height: 25,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

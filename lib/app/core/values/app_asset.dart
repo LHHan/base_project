@@ -14,10 +14,11 @@ class AppAssets {
 
   /// #region Icon
   /// -----------------
-  String icAppIcon = 'assets/base/icons/ic_app_icon.png';
-  String icEmpty = 'assets/base/icons/ic_empty.png';
+  String icAppIcon = 'assets/app/icons/ic_app_icon.png';
+  String icEmpty = 'assets/app/icons/ic_empty.png';
 
   /// #region Image, Video
   /// -----------------
-
+  String imFlagVi = 'assets/app/images/im_flag_vi.png';
+  String imFlagEn = 'assets/app/images/im_flag_us.png';
 }

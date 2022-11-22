@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'app/core/themes/app_theme.dart';
 import 'app/core/utils/app_config.dart';
 import 'app/routes/app_pages.dart';
+import 'app/services/localization_service.dart';
 
 Future<void> main() async {
   /// Start services later
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
       theme: AppTheme().light,
       darkTheme: AppTheme().dark,
       themeMode: ThemeMode.system,
+      locale: LocalizationService.locale,
+      fallbackLocale: LocalizationService.fallbackLocale,
+      translations: LocalizationService(),
     );
   }
 }
