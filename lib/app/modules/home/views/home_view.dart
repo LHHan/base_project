@@ -21,14 +21,14 @@ class HomeView extends GetView<HomeController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Spacer(),
+            const Spacer(),
             Center(
               child: Text(
                 '${'hello'.tr} ${AppConfig.I.env.envType == EnvType.dev ? 'DEV' : 'PROD'}',
                 style: AppStyles().normalTextStyle(20),
               ),
             ),
-            Spacer(),
+            const Spacer(),
 
             /// Change App Theme Card
             Card(
