@@ -1,6 +1,6 @@
 /* Define app config multi environment */
-import '../themes/app_theme.dart';
-import '../values/app_enum.dart';
+import 'app_theme.dart';
+import 'app_enum.dart';
 
 /// Environment declare here
 class Env {

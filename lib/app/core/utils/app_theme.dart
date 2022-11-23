@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../values/app_asset.dart';
-import '../values/app_colors.dart';
+import 'app_asset.dart';
+import 'app_colors.dart';
 
 class AppTheme {
   static final AppTheme _singleton = AppTheme._internal();

@@ -1,5 +1,5 @@
-import 'package:base_project_getx/app/core/themes/app_theme.dart';
-import 'package:base_project_getx/app/core/values/app_enum.dart';
+import 'package:base_project_getx/app/core/utils/app_theme.dart';
+import 'package:base_project_getx/app/core/utils/app_enum.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/app_log.dart';

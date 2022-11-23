@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'app/core/themes/app_theme.dart';
+import 'app/core/utils/app_theme.dart';
 import 'app/core/utils/app_config.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/localization_service.dart';

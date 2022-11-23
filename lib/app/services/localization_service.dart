@@ -1,12 +1,10 @@
-import 'dart:collection';
 import 'dart:ui';
 
-import 'package:get/get_navigation/src/root/internacionalization.dart';
 import 'package:get/get.dart';
 
 import '../core/languages/string_en.dart';
 import '../core/languages/string_vi.dart';
-import '../core/values/app_enum.dart';
+import '../core/utils/app_enum.dart';
 
 class LocalizationService extends Translations {
   /// Get locale when open app
