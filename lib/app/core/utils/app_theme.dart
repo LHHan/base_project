@@ -14,13 +14,25 @@ class AppTheme {
 
   /// Light theme
   ThemeData light = ThemeData(
-    brightness: Brightness.light,
-    fontFamily: AppAssets().fontLato,
+    colorScheme: ColorScheme(
+      brightness: Brightness.light,
+      primary: AppColors().colorPrimary,
+      onPrimary: Colors.white,
+      secondary: AppColors().colorSecondary,
+      onSecondary: Colors.white,
+      error: AppColors().colorError,
+      onError: Colors.white,
+      background: AppColors().colorBackground,
+      onBackground: Colors.black,
+      surface: Colors.white,
+      onSurface: Colors.black,
+    ),
+    fontFamily: AppAssets().fontRoboto,
   );
 
   /// Dart theme
   ThemeData dark = ThemeData(
     brightness: Brightness.dark,
-    fontFamily: AppAssets().fontLato,
+    fontFamily: AppAssets().fontRoboto,
   );
 }
