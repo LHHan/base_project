@@ -1,0 +1,132 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../core/utils/app_colors.dart';
+import '../core/utils/app_style.dart';
+
+class WInputForm extends StatelessWidget {
+  const WInputForm({
+    Key? key,
+    this.controller,
+    this.labelText,
+    this.hintText,
+    this.errorText,
+    this.suffixIcon,
+    this.obscureText = false,
+    this.readOnly = false,
+    this.onTap,
+    this.onChanged,
+    this.onSubmitted,
+    this.focusNode,
+    this.keyboardType = TextInputType.text,
+    this.textInputAction = TextInputAction.next,
+  }) : super(key: key);
+
+  const WInputForm.email({
+    Key? key,
+    this.controller,
+    this.labelText = 'Email',
+    this.hintText = 'Enter your email',
+    this.errorText,
+    this.suffixIcon,
+    this.obscureText = false,
+    this.onTap,
+    this.readOnly = false,
+    this.onChanged,
+    this.onSubmitted,
+    this.focusNode,
+    this.textInputAction = TextInputAction.next,
+    this.keyboardType = TextInputType.emailAddress,
+  }) : super(key: key);
+
+  const WInputForm.password({
+    Key? key,
+    this.controller,
+    this.labelText = 'Password',
+    this.hintText = 'Enter your password',
+    this.errorText,
+    this.suffixIcon,
+    this.obscureText = true,
+    this.onTap,
+    this.readOnly = false,
+    this.onChanged,
+    this.onSubmitted,
+    this.focusNode,
+    this.textInputAction = TextInputAction.done,
+    this.keyboardType = TextInputType.visiblePassword,
+  }) : super(key: key);
+
+  final TextEditingController? controller;
+  final String? labelText;
+  final String? hintText;
+  final String? errorText;
+  final Widget? suffixIcon;
+  final bool obscureText;
+  final bool readOnly;
+  final Function()? onTap;
+  final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
+  final FocusNode? focusNode;
+  final TextInputAction textInputAction;
+  final TextInputType keyboardType;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      autocorrect: false,
+      enableSuggestions: false,
+      style:
+          AppStyles().normalTextStyle(16.sp, color: AppColors().colorPrimary),
+      decoration: InputDecoration(
+        labelText: errorText ?? labelText,
+        hintText: hintText,
+        labelStyle: AppStyles().normalTextStyle(12.sp,
+            color: errorText != null
+                ? AppColors().colorError
+                : AppColors().colorPrimary),
+        hintStyle:
+            AppStyles().normalTextStyle(16.sp, color: const Color(0xFFA7A7A7)),
+        constraints: BoxConstraints.expand(height: 52.11.r),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: errorText != null
+                ? AppColors().colorError
+                : AppColors().colorPrimary,
+            width: 2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: errorText != null
+                ? AppColors().colorError
+                : AppColors().colorPrimary,
+            width: 2,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: errorText != null
+                ? AppColors().colorError
+                : AppColors().colorPrimary,
+            width: 2,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors().colorError, width: 2)),
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors().colorError, width: 2)),
+        suffixIcon: suffixIcon,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 14, horizontal: 16).r,
+      ),
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      onChanged: onChanged,
+      onFieldSubmitted: onSubmitted,
+      focusNode: focusNode,
+      textInputAction: textInputAction,
+    );
+  }
+}
