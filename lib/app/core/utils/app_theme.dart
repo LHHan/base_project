@@ -28,6 +28,7 @@ class AppTheme {
       onSurface: Colors.black,
     ),
     fontFamily: AppAssets().fontRoboto,
+    // you can custom something here (pageTransitionsTheme, buttonTheme, textTheme,..)
   );
 
   /// Dart theme
