@@ -2,8 +2,12 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
 import '../../core/utils/app_config.dart';
+import '../../services/auth_service.dart';
 
 class BaseProvider extends GetConnect {
+  /// Auth Service
+  var authService = Get.find<AuthService>();
+
   @override
   void onInit() {
     /// Get base url by env
@@ -18,15 +22,21 @@ class BaseProvider extends GetConnect {
 
     /// It's will attach 'Authorization' property on header from all requests
     httpClient.addRequestModifier((Request request) async {
-      // request.headers['Authorization'] = 'Bearer {AccessToken}';
+      if (authService.token != null) {
+        request.headers['Authorization'] =
+            'Bearer ${authService.token?.accessToken}';
+      }
       return request;
     });
 
     httpClient.addAuthenticator((Request request) async {
-      /// Call refresh token
+      /// Call api refresh token
 
       /// Add header authorization
-      // request.headers['Authorization'] = 'Bearer {AccessToken}';
+      if (authService.token != null) {
+        request.headers['Authorization'] =
+            'Bearer ${authService.token?.accessToken}';
+      }
       return request;
     });
 

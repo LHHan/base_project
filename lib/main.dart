@@ -1,18 +1,21 @@
-import 'package:base_project_getx/app/core/utils/app_log.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-import 'app/core/utils/app_theme.dart';
 import 'app/core/utils/app_config.dart';
+import 'app/core/utils/app_log.dart';
+import 'app/core/utils/app_theme.dart';
 import 'app/routes/app_pages.dart';
+import 'app/services/app_binding.dart';
+import 'app/services/auth_service.dart';
 import 'app/services/localization_service.dart';
 
 Future<void> main() async {
   /// Start services later
   WidgetsFlutterBinding.ensureInitialized();
+  await _initialService();
 
   /// Force portrait mode
   await SystemChrome.setPreferredOrientations(
@@ -61,6 +64,7 @@ class MyApp extends StatelessWidget {
         title: 'Application',
         debugShowCheckedModeBanner: false,
         initialRoute: AppPages.INITIAL,
+        initialBinding: AppBinding(),
         getPages: AppPages.routes,
         theme: AppTheme().light,
         darkTheme: AppTheme().dark,
@@ -88,4 +92,12 @@ Future<void> _loadEnvironment() async {
     logger.e('Unknown flavor: $flavor');
     throw Exception("Unknown flavor: $flavor");
   }
+}
+
+Future<void> _initialService() async {
+  /// GetStorage service
+  await GetStorage.init();
+
+  /// Authentication service
+  Get.put(AuthService());
 }

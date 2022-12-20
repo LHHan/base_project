@@ -25,5 +25,7 @@ class Token {
         'refresh_token': refreshToken,
       };
 
-  String get localKey => 'keyToken';
+  static const String localKey = 'keyToken';
+
+  String logged() => 'keyToken';
 }

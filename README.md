@@ -23,7 +23,8 @@ lib/
             |-app_themes.dart           ---> define app themes
     |-data/                             ---> place responsible for containing everything related to our data
         |-models/                       ---> place app data model
-            |-user_response_model.dart  ---> define user response model
+            |-token_model.dart          ---> define token response model
+            |-user_model.dart           ---> define user response model
         |-providers/                    ---> place app provider
             |-base_provider.dart        ---> define base provider
     |-modules/                          ---> define all pages/screens of application
@@ -36,6 +37,8 @@ lib/
         |-app_pages.dart                ---> define routing
         |-app_routes.dart               ---> define constant routes
     |-services/                         ---> place app services
+        |-app_binding.dart              ---> define init dependencies
+        |-auth_service.dart             ---> define authorization service
         |-localization_service.dart     ---> define localization service
         |-notification_service.dart     ---> define notification service
     |-widgets/                          ---> place app widgets for all app
