@@ -76,50 +76,12 @@ class WInputForm extends StatelessWidget {
       controller: controller,
       autocorrect: false,
       enableSuggestions: false,
-      style:
-          AppStyles().normalTextStyle(16.sp, color: AppColors().colorPrimary),
       decoration: InputDecoration(
-        labelText: errorText ?? labelText,
+        labelText: labelText,
         hintText: hintText,
-        labelStyle: AppStyles().normalTextStyle(12.sp,
-            color: errorText != null
-                ? AppColors().colorError
-                : AppColors().colorPrimary),
-        hintStyle:
-            AppStyles().normalTextStyle(16.sp, color: const Color(0xFFA7A7A7)),
-        constraints: BoxConstraints.expand(height: 52.11.r),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: errorText != null
-                ? AppColors().colorError
-                : AppColors().colorPrimary,
-            width: 2,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: errorText != null
-                ? AppColors().colorError
-                : AppColors().colorPrimary,
-            width: 2,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: errorText != null
-                ? AppColors().colorError
-                : AppColors().colorPrimary,
-            width: 2,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors().colorError, width: 2)),
-        focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors().colorError, width: 2)),
+        errorText: errorText,
+        border: const OutlineInputBorder(),
         suffixIcon: suffixIcon,
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 14, horizontal: 16).r,
       ),
       keyboardType: keyboardType,
       obscureText: obscureText,

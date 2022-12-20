@@ -8,8 +8,9 @@ lib/
   |-app/                                ---> this is where all the application's directories will be contained
     |-core/                             ---> place app core
         |-languages/                    ---> for applications that use internationalization, they can deposit their translation files here
-            |-ja_JP.dart                ---> define Japanese translation file
-            |-en_US.dart                ---> define English translation file
+            |-en_us.dart                ---> define English translation file
+            |-ja_jp.dart                ---> define Japanese translation file
+            |-vi_vn.dart                ---> define Vietnamese translation file
         |-utils/                        ---> place app utils
             |-app_asset.dart            ---> define app assets
             |-app_config.dart           ---> define app config multi environment

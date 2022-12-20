@@ -9,8 +9,8 @@ class AppColors {
 
   AppColors._internal();
 
-  Color colorPrimary = const Color(0xFF477256);
-  Color colorSecondary = const Color(0xFF988F22);
+  Color colorPrimary = const Color(0xFF6200EE);
+  Color colorSecondary = const Color(0xFF03DAC6);
   Color colorError = const Color(0xFFB00020);
   Color colorBackground = const Color(0xFFFDFBF3);
 }
