@@ -24,4 +24,6 @@ class Token {
         'access_token': accessToken,
         'refresh_token': refreshToken,
       };
+
+  String get localKey => 'keyToken';
 }
