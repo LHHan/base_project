@@ -39,7 +39,10 @@ class PAppBarTransparency extends StatelessWidget {
               children: [
                 Scaffold(
                   backgroundColor: theme.colorScheme.background,
-                  body: SafeArea(child: child ?? const SizedBox()),
+                  body: SafeArea(
+                    bottom: false,
+                    child: child ?? const SizedBox(),
+                  ),
                 ),
                 if (Navigator.canPop(context) && forceHideBackButton != true)
                   backButton ??

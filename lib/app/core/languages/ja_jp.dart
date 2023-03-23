@@ -1,4 +1,4 @@
-const Map<String, String> vi = {
+const Map<String, String> ja = {
   /// #region screen name
   'screenNameSettings': 'Cài đặt',
   'screenNameHome': 'Trang chủ',

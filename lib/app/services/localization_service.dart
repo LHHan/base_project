@@ -1,8 +1,11 @@
 import 'dart:ui';
 
+import 'package:base_project_getx/app/data/models/languages_model.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../core/languages/en_us.dart';
+import '../core/languages/ja_jp.dart';
 import '../core/languages/vi_vn.dart';
 import '../core/utils/app_enum.dart';
 
@@ -17,8 +20,14 @@ class LocalizationService extends Translations {
 
   /// List of supported Locales
   static final locales = [
-    const Locale('en', 'US'),
     const Locale('vi', 'VN'),
+    const Locale('en', 'US'),
+    const Locale('ja', 'JP'),
+    const Locale('fr', 'FR'),
+    const Locale('ru', 'RU'),
+    const Locale('ko', 'KO'),
+    const Locale('es', 'ES'),
+    const Locale('pt', 'PT'),
   ];
 
   /// Change locale function
@@ -31,7 +40,9 @@ class LocalizationService extends Translations {
   /// Get locale from language function (private)
   /// Params: String? langCode
   static Locale _getLocaleFromLanguage({String? langCode}) {
-    var lang = langCode ?? Get.deviceLocale?.languageCode;
+    var lang = langCode ??
+        GetStorage().read(Languages().localKey) ??
+        Get.deviceLocale?.languageCode;
     for (int i = 0; i < LocaleCode.values.length; i++) {
       if (lang == LocaleCode.values[i].name) return locales[i];
     }
@@ -40,7 +51,13 @@ class LocalizationService extends Translations {
 
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': en,
         'vi_VN': vi,
+        'en_US': en,
+        'ja_JP': ja,
+        'fr_FR': en,
+        'ru_RU': en,
+        'ko_KO': en,
+        'es_ES': en,
+        'pt_PT': en,
       };
 }

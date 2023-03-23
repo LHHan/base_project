@@ -6,9 +6,13 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
+  static const SETTING = _Paths.SETTING;
+  static const SETTING_LANGUAGES = _Paths.SETTING_LANGUAGES;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
+  static const SETTING = '/setting';
+  static const SETTING_LANGUAGES = '/languages';
 }

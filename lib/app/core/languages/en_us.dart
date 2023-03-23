@@ -1,5 +1,17 @@
 const Map<String, String> en = {
-  'hello': 'Hello',
-  'changeAppTheme': 'Change App Theme',
-  'changeAppLocale': 'Change App Locale',
+  /// #region screen name
+  'screenNameSettings': 'Settings',
+  'screenNameHome': 'Home',
+
+  /// #region label
+  'labelAccount': 'Account',
+  'labelGeneral': 'General',
+  'labelLanguages': 'Languages',
+  'labelTheme': 'Theme',
+  'labelChangePassword': 'Change password',
+  'labelEnglish': 'English',
+  'labelVietnamese': 'Vietnamese',
+
+  /// #region button
+  'btnLogout': 'Logout',
 };
