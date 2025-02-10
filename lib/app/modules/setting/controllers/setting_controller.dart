@@ -8,7 +8,7 @@ import '../../../services/localization_service.dart';
 
 class SettingController extends GetxController {
   /// #region define variables
-  bool isDark = Get.isDarkMode;
+  var isDark = Get.isDarkMode.obs;
 
   /// #region define functions
   void onPressedLanguages() {
@@ -21,10 +21,15 @@ class SettingController extends GetxController {
   }
 
   void onChangeAppTheme() {
-    isDark
-        ? Get.changeTheme(AppTheme().light)
-        : Get.changeTheme(AppTheme().dark);
-    isDark = !isDark;
-    logger.i('Changed App Theme to \'${isDark ? 'dark' : 'light'}\'');
+    isDark.value = !isDark.value;
+
+
+    isDark.value
+        ? Get.changeTheme(AppTheme().dark)
+        : Get.changeTheme(AppTheme().light);
+
+    update(['idSettingPage']);
+
+    logger.i('Changed App Theme to \'${isDark.value ? 'dark' : 'light'}\'');
   }
 }

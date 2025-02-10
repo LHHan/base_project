@@ -11,6 +11,7 @@ const Map<String, String> vi = {
   'labelChangePassword': 'Đổi mật khẩu',
   'labelEnglish': 'English',
   'labelVietnamese': 'Tiếng Việt',
+  'labelCurrentLanguages': 'Tiếng Việt',
 
   /// #region button
   'btnLogout': 'Logout',
