@@ -61,19 +61,21 @@ class SettingView extends GetView<SettingController> {
                         WSettingItem(
                           title: "labelLanguages".tr,
                           onPressed: controller.onPressedLanguages,
-                          subTitle: "English",
+                          subTitle: "labelCurrentLanguages".tr,
                           leading: const Icon(Icons.language),
                         ),
 
                         const Divider(height: 0),
 
                         /// Themes
-                        WSettingItem(
-                          title: 'labelTheme'.tr,
-                          onPressed: controller.onChangeAppTheme,
-                          subTitle: "Light",
-                          leading: const Icon(Icons.lightbulb),
-                        ),
+                       WSettingItem(
+                            title: 'labelTheme'.tr,
+                            onPressed: controller.onChangeAppTheme,
+                            subTitle:
+                                controller.isDark.value ? "Dark" : "Light",
+                            leading: const Icon(Icons.lightbulb),
+                          ),
+
                       ],
                     ),
                   ),
