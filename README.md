@@ -7,9 +7,10 @@ The Flutter application built with GetX for state management and multilingual su
 ## 📸 Demo
 
 <div style="display: flex; overflow-x: auto; white-space: nowrap;">
-  <img src="assets/store/screenshots/screenshot_slash.png" width="360px" style="margin-right: 10px;" alt="">
-  <img src="assets/store/screenshots/screenshot_settings_light.png" width="360px" style="margin-right: 10px;" alt="">
-  <img src="assets/store/screenshots/screenshot_settings_dark.png" width="360px" alt="">
+  <img src="assets/store/screenshots/screenshot_settings_dark.png" width="120px" style="margin-right: 10px;" alt="">
+  <img src="assets/store/screenshots/screenshot_slash.png" width="120px" style="margin-right: 10px;" alt="">
+  <img src="assets/store/screenshots/screenshot_settings_light.png" width="120px" alt="">
+
 </div>
 
 ## 🔥 Features | Tính năng chính
