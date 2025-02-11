@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,9 +14,11 @@ import 'app/services/auth_service.dart';
 import 'app/services/localization_service.dart';
 
 Future<void> main() async {
-  /// Start services later
   WidgetsFlutterBinding.ensureInitialized();
-  await _initialService();
+
+  /// Splash screen
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   /// Force portrait mode
   await SystemChrome.setPreferredOrientations(
@@ -74,6 +77,13 @@ class MyApp extends StatelessWidget {
         fallbackLocale: LocalizationService.fallbackLocale,
         translations: LocalizationService(),
         home: __,
+        onInit: () async {
+          /// Start services later
+          await _initialService();
+        },
+        onReady: () async {
+          FlutterNativeSplash.remove();
+        },
       ),
     );
   }

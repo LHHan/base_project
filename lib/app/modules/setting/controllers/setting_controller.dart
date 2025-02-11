@@ -10,6 +10,11 @@ class SettingController extends GetxController {
   /// #region define variables
   var isDark = Get.isDarkMode.obs;
 
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+  }
+
   /// #region define functions
   void onPressedLanguages() {
     Get.toNamed(
@@ -22,7 +27,6 @@ class SettingController extends GetxController {
 
   void onChangeAppTheme() {
     isDark.value = !isDark.value;
-
 
     isDark.value
         ? Get.changeTheme(AppTheme().dark)
