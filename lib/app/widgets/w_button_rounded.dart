@@ -30,29 +30,29 @@ class WButtonRounded extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
+        backgroundColor: WidgetStateProperty.all<Color>(
             background ?? AppColors().colorPrimary),
-        overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
+        overlayColor: WidgetStateProperty.resolveWith<Color?>(
+            (Set<WidgetState> states) {
           final Color sColor = splashColor ?? Colors.grey.withAlpha(100);
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             return sColor;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             return sColor;
           }
           return null; // Defer to the widget's default.
         }),
-        elevation: MaterialStateProperty.all(0),
-        padding: MaterialStateProperty.all(padding ?? EdgeInsets.zero),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        elevation: WidgetStateProperty.all(0),
+        padding: WidgetStateProperty.all(padding ?? EdgeInsets.zero),
+        shape: WidgetStateProperty.all(RoundedRectangleBorder(
           side: BorderSide(
               color: borderColor ?? Colors.transparent,
               width: borderWidth ?? 1.0),
           borderRadius: BorderRadius.circular(radius ?? 50),
         )),
         minimumSize:
-            MaterialStateProperty.all(minimumSize ?? const Size(64, 36)),
+            WidgetStateProperty.all(minimumSize ?? const Size(64, 36)),
       ),
       onPressed: onPressed,
       child: child,

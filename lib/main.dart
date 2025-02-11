@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(428, 926),
       minTextAdapt: true,
+      splitScreenMode: true,
       builder: (_, __) => GetMaterialApp(
         title: 'Application',
         debugShowCheckedModeBanner: false,
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         locale: LocalizationService.locale,
         fallbackLocale: LocalizationService.fallbackLocale,
         translations: LocalizationService(),
+        home: __,
       ),
     );
   }

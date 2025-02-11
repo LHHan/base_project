@@ -124,7 +124,7 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
                     width: 200.w,
                     height: 45.h,
                     child: WButtonRounded(
-                      background: const ColorScheme.light().background,
+                      background: const ColorScheme.light().surface,
                       onPressed: controller.onPressedOKButton,
                       child: Text(
                         'OK',
