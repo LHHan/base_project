@@ -1,8 +1,25 @@
-# base_project
+# 🚀 Base Flutter Project (With GetX)
 
-Base Flutter project.
+( Tiếng Việt 🇻🇳 | English 🇬🇧 )
+Ứng dụng Flutter được xây dựng với GetX để quản lý trạng thái và hỗ trợ đa ngôn ngữ.
+The Flutter application built with GetX for state management and multilingual support.
 
-## Structure
+## 📸 Demo
+
+![App Screenshot](assets/store/screenshots/screenshot_slash.png)
+![App Screenshot](assets/store/screenshots/screenshot_settings_light.png)
+![App Screenshot](assets/store/screenshots/screenshot_settings_dark.png)
+
+## 🔥 Features | Tính năng chính
+
+✅ State management using GetX
+✅ Flavor
+✅ Multilingual support
+✅ Dark mode / Light mode
+✅ Splash screen
+
+## 📂 Folder Structure | Cấu trúc thư mục
+
 ```
 lib/
   |-app/                                ---> this is where all the application's directories will be contained
@@ -49,3 +66,12 @@ lib/
 test/                              ---> place app unit, widget tests
 test_driver/                       ---> place integration testing
 ```
+
+## 📦 Technologies Used | Công nghệ sử dụng
+
+- get (4.6.6) 👉 https://pub.dev/packages/get
+- get_storage 👉 https://pub.dev/packages/get_storage
+- flutter_screenutil (5.9.3) 👉 https://pub.dev/packages/flutter_screenutil
+- flutter_native_splash 👉 https://pub.dev/packages/flutter_native_splash
+- flutter_svg 👉 https://pub.dev/packages/flutter_svg
+- logger 👉 https://pub.dev/packages/logger

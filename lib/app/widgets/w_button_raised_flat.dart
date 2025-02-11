@@ -20,22 +20,22 @@ class WButtonRaisedFlat extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor:
-            MaterialStateProperty.all<Color>(color ?? Colors.transparent),
-        overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
+            WidgetStateProperty.all<Color>(color ?? Colors.transparent),
+        overlayColor: WidgetStateProperty.resolveWith<Color?>(
+            (Set<WidgetState> states) {
           final Color sColor = splashColor ?? Colors.grey.withAlpha(100);
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             return sColor;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             return sColor;
           }
           return null; // Defer to the widget's default.
         }),
-        elevation: MaterialStateProperty.all(0),
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
+        elevation: WidgetStateProperty.all(0),
+        padding: WidgetStateProperty.all(EdgeInsets.zero),
         minimumSize:
-            MaterialStateProperty.all(minimumSize ?? const Size(64, 36)),
+            WidgetStateProperty.all(minimumSize ?? const Size(64, 36)),
       ),
       onPressed: onPressed,
       child: child,

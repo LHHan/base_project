@@ -38,7 +38,7 @@ class PAppBarTransparency extends StatelessWidget {
             Stack(
               children: [
                 Scaffold(
-                  backgroundColor: theme.colorScheme.background,
+                  backgroundColor: theme.colorScheme.surface,
                   body: SafeArea(
                     bottom: false,
                     child: child ?? const SizedBox(),

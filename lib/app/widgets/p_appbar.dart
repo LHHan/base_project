@@ -31,7 +31,7 @@ class PAppBar extends StatelessWidget {
         Get.isDarkMode ? AppConfig.I.theme.dark : AppConfig.I.theme.light;
     return PMaterial(
       child: Scaffold(
-        backgroundColor: theme.colorScheme.background,
+        backgroundColor: theme.colorScheme.surface,
         drawer: drawer,
         appBar: AppBar(
           elevation: 0,

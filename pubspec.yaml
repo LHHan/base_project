@@ -7,30 +7,32 @@ homepage: https://github.com/LHHan/base_project
 environment:
   sdk: '>=2.17.5 <3.0.0'
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.6
   logger: ^1.1.0
   get_storage: ^2.0.3
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.4
+  flutter_native_splash: ^2.4.4
   flutter:
     sdk: flutter
 
 flutter_intl:
   enabled: true
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^2.0.1
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
+flutter:
   uses-material-design: true
   assets:
     - assets/app/fonts/
     - assets/app/icons/
     - assets/app/images/
+    - assets/store/screenshots/
 
   fonts:
     - family: Roboto
@@ -72,3 +74,19 @@ flutter:
           style: italic
           weight: 900
 
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/app/images/im_splash.jpg
+  #  branding: assets/branding-development.png
+  color_dark: "#121212"
+  image_dark: assets/app/images/im_splash.jpg
+  #  branding_dark: assets/branding-development.png
+
+  android_12:
+    image: assets/app/images/im_splash.jpg
+    icon_background_color: "#ffffff"
+    image_dark: assets/app/images/im_splash.jpg
+    icon_background_color_dark: "#121212"
+
+  web: false
