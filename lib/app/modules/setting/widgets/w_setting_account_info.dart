@@ -31,10 +31,10 @@ class WSettingAccountInfo extends StatelessWidget {
           /// Avatar
           CircleAvatar(
             maxRadius: 70.r,
-            backgroundColor: Colors.orange.withOpacity(0.4),
+            backgroundColor: Colors.orange.withValues(alpha: 0.4),
             child: CircleAvatar(
               maxRadius: 55.r,
-              backgroundColor: Colors.orange.withOpacity(0.5),
+              backgroundColor: Colors.orange.withValues(alpha: 0.5),
               child: CircleAvatar(
                 maxRadius: 45.r,
                 backgroundColor: Colors.white54,

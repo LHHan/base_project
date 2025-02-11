@@ -69,7 +69,7 @@ class _WPickerTimeState extends State<WPickerTime> {
               'Confirm',
               style: AppStyles().normalTextStyle(17.sp,
                   color: const Color(0xFF0080FA)
-                      .withOpacity(isTimeValid ? 1 : 0.4)),
+                      .withValues(alpha: isTimeValid ? 1 : 0.4)),
             ),
           ),
         ),

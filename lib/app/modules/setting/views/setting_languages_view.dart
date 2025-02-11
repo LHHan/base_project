@@ -94,10 +94,10 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
                 Positioned(
                   child: CircleAvatar(
                     maxRadius: 70.r,
-                    backgroundColor: Colors.black12.withOpacity(0.1),
+                    backgroundColor: Colors.black12.withValues(alpha: 0.1),
                     child: CircleAvatar(
                       maxRadius: 55.r,
-                      backgroundColor: Colors.black12.withOpacity(0.1),
+                      backgroundColor: Colors.black12.withValues(alpha: 0.1),
                       child: CircleAvatar(
                         maxRadius: 45.r,
                         backgroundColor: Colors.white54,
