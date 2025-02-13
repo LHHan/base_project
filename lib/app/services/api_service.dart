@@ -119,52 +119,23 @@ class ApiService extends GetxService {
   }
 
   /// 🟢 **GET request**
-  Future<Response> get(String path,
-      {Map<String, dynamic>? queryParams, String? overrideBaseUrl}) async {
-    final requestOptions = Options(headers: {..._dio.options.headers});
-
-    if (overrideBaseUrl != null) {
-      requestOptions.extra = {'baseUrl': overrideBaseUrl};
-    }
-
-    return await _dio.get(path,
-        queryParameters: queryParams, options: requestOptions);
+  Future<Response> get(String path, {Map<String, dynamic>? queryParams}) async {
+    return await _dio.get(path, queryParameters: queryParams);
   }
 
   /// 🟠 **POST request**
-  Future<Response> post(String path,
-      {dynamic data, String? overrideBaseUrl}) async {
-    final requestOptions = Options(headers: {..._dio.options.headers});
-
-    if (overrideBaseUrl != null) {
-      requestOptions.extra = {'baseUrl': overrideBaseUrl};
-    }
-
-    return await _dio.post(path, data: data, options: requestOptions);
+  Future<Response> post(String path, {dynamic data}) async {
+    return await _dio.post(path, data: data);
   }
 
   /// 🔵 **PUT request**
-  Future<Response> put(String path,
-      {dynamic data, String? overrideBaseUrl}) async {
-    final requestOptions = Options(headers: {..._dio.options.headers});
-
-    if (overrideBaseUrl != null) {
-      requestOptions.extra = {'baseUrl': overrideBaseUrl};
-    }
-
-    return await _dio.put(path, data: data, options: requestOptions);
+  Future<Response> put(String path, {dynamic data}) async {
+    return await _dio.put(path, data: data);
   }
 
   /// 🔴 **DELETE request**
-  Future<Response> delete(String path,
-      {dynamic data, String? overrideBaseUrl}) async {
-    final requestOptions = Options(headers: {..._dio.options.headers});
-
-    if (overrideBaseUrl != null) {
-      requestOptions.extra = {'baseUrl': overrideBaseUrl};
-    }
-
-    return await _dio.delete(path, data: data, options: requestOptions);
+  Future<Response> delete(String path, {dynamic data}) async {
+    return await _dio.delete(path, data: data);
   }
 
   /// 🚨 **Handle errors**
