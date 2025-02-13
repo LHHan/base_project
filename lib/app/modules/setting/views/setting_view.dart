@@ -4,7 +4,6 @@ import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:base_project_getx/app/widgets/w_button_rounded.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 
 import '../../../core/utils/app_asset.dart';
@@ -68,14 +67,12 @@ class SettingView extends GetView<SettingController> {
                         const Divider(height: 0),
 
                         /// Themes
-                       WSettingItem(
-                            title: 'labelTheme'.tr,
-                            onPressed: controller.onChangeAppTheme,
-                            subTitle:
-                                controller.isDark.value ? "Dark" : "Light",
-                            leading: const Icon(Icons.lightbulb),
-                          ),
-
+                        WSettingItem(
+                          title: 'labelTheme'.tr,
+                          onPressed: controller.onChangeAppTheme,
+                          subTitle: controller.isDark.value ? "Dark" : "Light",
+                          leading: const Icon(Icons.lightbulb),
+                        ),
                       ],
                     ),
                   ),
@@ -94,6 +91,23 @@ class SettingView extends GetView<SettingController> {
                           onPressed: () {},
                           leading:
                               const Icon(Icons.admin_panel_settings_rounded),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  25.verticalSpace,
+
+                  Padding(
+                    padding: kPadding,
+                    child: WSettingRegion(
+                      label: "labelLearning".tr,
+                      children: [
+                        /// Learning Isolate
+                        WSettingItem(
+                          title: "labelIsolate".tr,
+                          onPressed: controller.onPressedBtnIsolate,
+                          leading: const Icon(Icons.multiple_stop),
                         ),
                       ],
                     ),

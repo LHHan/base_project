@@ -35,6 +35,7 @@ flutter:
     - assets/app/fonts/
     - assets/app/icons/
     - assets/app/images/
+    - assets/app/models/
     - assets/store/screenshots/
 
   fonts:

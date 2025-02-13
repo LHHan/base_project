@@ -13,7 +13,7 @@ class Env {
   factory Env.dev() {
     return Env._(
       envType: EnvType.dev,
-      apiBaseUrl: 'https://api.dev',
+      apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     );
   }
 

@@ -12,6 +12,8 @@ const Map<String, String> ja = {
   'labelEnglish': 'English',
   'labelVietnamese': 'Tiếng Việt',
   'labelCurrentLanguages': 'Japanese',
+  'labelLearning': 'Học',
+  'labelIsolate': 'Isolate',
 
   /// #region button
   'btnLogout': 'Logout',
