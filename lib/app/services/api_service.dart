@@ -50,11 +50,15 @@ class ApiService extends GetxService {
           onError: (DioException e, handler) async {
             if (e.response?.statusCode == 401 &&
                 e.requestOptions.extra['refresh'] != true) {
+              logger.e("🔴 Unauthorized error - trying refresh token...");
               final success = await _handleRefreshToken();
+
               if (success) {
+                logger.i("✅ Token refreshed, retrying request...");
                 final requestOptions = e.requestOptions;
                 requestOptions.headers['Authorization'] =
                     'Bearer $_accessToken';
+
                 try {
                   final clonedRequest = await _dio.fetch(requestOptions);
                   return handler.resolve(clonedRequest);
@@ -63,6 +67,8 @@ class ApiService extends GetxService {
                 }
               }
             }
+
+            logger.e("❌ API Request failed: ${e.message}");
             return handler.reject(handleError(e));
           },
         ),
@@ -113,50 +119,72 @@ class ApiService extends GetxService {
   }
 
   /// 🟢 **GET request**
-  Future<Response> get(String path, {Map<String, dynamic>? queryParams}) async {
-    return await _dio.get(path, queryParameters: queryParams);
+  Future<Response> get(String path,
+      {Map<String, dynamic>? queryParams, String? overrideBaseUrl}) async {
+    final requestOptions = Options(headers: {..._dio.options.headers});
+
+    if (overrideBaseUrl != null) {
+      requestOptions.extra = {'baseUrl': overrideBaseUrl};
+    }
+
+    return await _dio.get(path,
+        queryParameters: queryParams, options: requestOptions);
   }
 
   /// 🟠 **POST request**
-  Future<Response> post(String path, {dynamic data}) async {
-    return await _dio.post(path, data: data);
+  Future<Response> post(String path,
+      {dynamic data, String? overrideBaseUrl}) async {
+    final requestOptions = Options(headers: {..._dio.options.headers});
+
+    if (overrideBaseUrl != null) {
+      requestOptions.extra = {'baseUrl': overrideBaseUrl};
+    }
+
+    return await _dio.post(path, data: data, options: requestOptions);
   }
 
   /// 🔵 **PUT request**
-  Future<Response> put(String path, {dynamic data}) async {
-    return await _dio.put(path, data: data);
+  Future<Response> put(String path,
+      {dynamic data, String? overrideBaseUrl}) async {
+    final requestOptions = Options(headers: {..._dio.options.headers});
+
+    if (overrideBaseUrl != null) {
+      requestOptions.extra = {'baseUrl': overrideBaseUrl};
+    }
+
+    return await _dio.put(path, data: data, options: requestOptions);
   }
 
   /// 🔴 **DELETE request**
-  Future<Response> delete(String path, {dynamic data}) async {
-    return await _dio.delete(path, data: data);
+  Future<Response> delete(String path,
+      {dynamic data, String? overrideBaseUrl}) async {
+    final requestOptions = Options(headers: {..._dio.options.headers});
+
+    if (overrideBaseUrl != null) {
+      requestOptions.extra = {'baseUrl': overrideBaseUrl};
+    }
+
+    return await _dio.delete(path, data: data, options: requestOptions);
   }
 
   /// 🚨 **Handle errors**
   DioException handleError(DioException error) {
-    switch (error.type) {
-      case DioExceptionType.connectionTimeout:
-        return error.copyWith(
-            message: "⏳ Connection timeout. Please try again.");
-      case DioExceptionType.sendTimeout:
-        return error.copyWith(
-            message: "⏳ Request timeout. Please check your connection.");
-      case DioExceptionType.receiveTimeout:
-        return error.copyWith(
-            message: "⏳ Server response timeout. Please try again later.");
-      case DioExceptionType.badResponse:
-        return error.copyWith(
-            message:
-                "⚠️ Server error: ${error.response?.statusCode}. Please try again.");
-      case DioExceptionType.cancel:
-        return error.copyWith(message: "🚫 Request was cancelled.");
-      case DioExceptionType.unknown:
-        return error.copyWith(
-            message: "❓ An unknown error occurred: ${error.message}");
-      default:
-        return error.copyWith(
-            message: "⚠️ Something went wrong: ${error.message}");
-    }
+    final messages = {
+      DioExceptionType.connectionTimeout:
+          "⏳ Connection timeout. Please try again.",
+      DioExceptionType.sendTimeout:
+          "⏳ Request timeout. Please check your connection.",
+      DioExceptionType.receiveTimeout:
+          "⏳ Server response timeout. Please try again later.",
+      DioExceptionType.badResponse:
+          "⚠️ Server error: ${error.response?.statusCode}. Please try again.",
+      DioExceptionType.cancel: "🚫 Request was cancelled.",
+      DioExceptionType.unknown: "❓ An unknown error occurred: ${error.message}",
+    };
+
+    return error.copyWith(
+        message: messages[error.type] ??
+            "⚠️ Something went wrong: ${error.message}");
   }
 
   /// 🔹 Xử lý refresh token khi bị 401
@@ -166,7 +194,7 @@ class ApiService extends GetxService {
       return _accessToken != null;
     }
 
-    if (_refreshToken == null) {
+    if (_refreshToken == null || _refreshToken!.isEmpty) {
       if (kDebugMode) logger.e('⚠️ No refresh token available.');
       return false;
     }

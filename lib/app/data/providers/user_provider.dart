@@ -10,7 +10,8 @@ class UserProvider extends ApiService {
 
   /// Call API to get the list of users
   Future<List<UserModel>> getUsers() async {
-    final response = await get(_users);
+    final response = await get(_users,
+        overrideBaseUrl: 'https://jsonplaceholder.typicode.com');
 
     if (response.statusCode == 200) {
       // Use a utility function to process JSON in an Isolate
