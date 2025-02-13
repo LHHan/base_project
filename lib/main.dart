@@ -9,6 +9,7 @@ import 'app/core/utils/app_config.dart';
 import 'app/core/utils/app_log.dart';
 import 'app/core/utils/app_theme.dart';
 import 'app/routes/app_pages.dart';
+import 'app/services/api_service.dart';
 import 'app/services/app_binding.dart';
 import 'app/services/auth_service.dart';
 import 'app/services/localization_service.dart';
@@ -112,4 +113,7 @@ Future<void> _initialService() async {
 
   /// Authentication service
   Get.put(AuthService());
+
+  /// Api service
+  Get.put(ApiService());
 }

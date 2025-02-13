@@ -1,15 +1,15 @@
-class User {
+class UserModel {
   final int id;
   final String name;
   final String email;
 
-  User({
+  UserModel({
     required this.id,
     required this.name,
     required this.email,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'] as int? ?? -1,
         name: json['name'] as String? ?? '',
         email: json['email'] as String? ?? '',

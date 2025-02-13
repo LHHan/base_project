@@ -12,6 +12,8 @@ const Map<String, String> vi = {
   'labelEnglish': 'English',
   'labelVietnamese': 'Tiếng Việt',
   'labelCurrentLanguages': 'Tiếng Việt',
+  'labelLearning': 'Học',
+  'labelIsolate': 'Isolate',
 
   /// #region button
   'btnLogout': 'Logout',

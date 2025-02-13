@@ -25,6 +25,10 @@ class SettingController extends GetxController {
     );
   }
 
+  void onPressedBtnIsolate() {
+    Get.toNamed(Routes.ISOLATE);
+  }
+
   void onChangeAppTheme() {
     isDark.value = !isDark.value;
 

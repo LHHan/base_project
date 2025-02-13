@@ -8,6 +8,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const SETTING = _Paths.SETTING;
   static const SETTING_LANGUAGES = _Paths.SETTING_LANGUAGES;
+  static const ISOLATE = _Paths.ISOLATE;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const SETTING = '/setting';
   static const SETTING_LANGUAGES = '/languages';
+  static const ISOLATE = '/isolate';
 }

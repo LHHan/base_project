@@ -1,6 +1,6 @@
 /* Define app config multi environment */
-import 'app_theme.dart';
 import 'app_enum.dart';
+import 'app_theme.dart';
 
 /// Environment declare here
 class Env {
@@ -13,7 +13,7 @@ class Env {
   factory Env.dev() {
     return Env._(
       envType: EnvType.dev,
-      apiBaseUrl: 'dev',
+      apiBaseUrl: 'https://api.dev',
     );
   }
 
@@ -21,7 +21,7 @@ class Env {
   factory Env.prod() {
     return Env._(
       envType: EnvType.prod,
-      apiBaseUrl: 'prod',
+      apiBaseUrl: 'https://api.prod',
     );
   }
 

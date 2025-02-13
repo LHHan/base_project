@@ -15,11 +15,13 @@ The Flutter application built with GetX for state management and multilingual su
 
 ## 🔥 Features | Tính năng chính
 
-✅ State management using GetX  
-✅ Flavor  
-✅ Multilingual support  
-✅ Dark mode / Light mode  
-✅ Splash screen
+✅ State management using GetX
+✅ Flavor
+✅ Multilingual support
+✅ Dark mode / Light mode
+✅ Splash screen  
+✅ Dio / GetConnect
+
 
 ## 📂 Folder Structure | Cấu trúc thư mục
 
@@ -74,6 +76,8 @@ test_driver/                       ---> place integration testing
 
 - get (4.6.6) 👉 https://pub.dev/packages/get
 - get_storage 👉 https://pub.dev/packages/get_storage
+- dio: (^5.8.0+1) 👉 https://pub.dev/packages/dio
+- pretty_dio_logger: (^1.4.0) 👉 https://pub.dev/packages/pretty_dio_logger
 - flutter_screenutil (5.9.3) 👉 https://pub.dev/packages/flutter_screenutil
 - flutter_native_splash 👉 https://pub.dev/packages/flutter_native_splash
 - flutter_svg 👉 https://pub.dev/packages/flutter_svg
