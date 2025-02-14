@@ -17,6 +17,7 @@ dependencies:
   flutter_native_splash: ^2.4.4
   dio: ^5.8.0+1
   pretty_dio_logger: ^1.4.0
+  google_fonts: ^6.2.1
   flutter:
     sdk: flutter
 
