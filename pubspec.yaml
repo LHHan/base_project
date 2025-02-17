@@ -18,6 +18,7 @@ dependencies:
   dio: ^5.8.0+1
   pretty_dio_logger: ^1.4.0
   google_fonts: ^6.2.1
+  intl: ^0.20.2
   flutter:
     sdk: flutter
 
