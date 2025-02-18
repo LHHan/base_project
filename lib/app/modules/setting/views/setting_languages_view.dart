@@ -14,8 +14,7 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
 
   @override
   Widget build(BuildContext context) {
-    return PAppBarTransparency(
-      forceHideBackButton: true,
+    return PAppbarTransparency(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

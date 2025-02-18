@@ -1,7 +1,7 @@
+import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../core/utils/app_style.dart';
+import 'package:get/get.dart';
 
 class WSettingRegion extends StatelessWidget {
   const WSettingRegion({
@@ -21,7 +21,7 @@ class WSettingRegion extends StatelessWidget {
         /// Label
         Text(
           label ?? '',
-          style: AppStyles().lightTextStyle(26.sp),
+          style: Get.textTheme.tsLabel,
         ),
 
         10.verticalSpace,

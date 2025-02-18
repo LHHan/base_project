@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 class WButtonInkwell extends StatelessWidget {
-  const WButtonInkwell(
-      {Key? key,
-      this.splashColor,
-      this.onPressed,
-      this.borderRadius,
-      this.child})
-      : super(key: key);
+  const WButtonInkwell({
+    Key? key,
+    required this.child,
+    required this.onPressed,
+    this.splashColor,
+    this.borderRadius = BorderRadius.zero,
+    this.padding = const EdgeInsets.all(8),
+  }) : super(key: key);
 
-  final Color? splashColor;
-  final Widget? child;
+  final Widget child;
   final Function()? onPressed;
+  final Color? splashColor;
   final BorderRadius? borderRadius;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,13 @@ class WButtonInkwell extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: borderRadius,
-        splashColor: splashColor,
+        splashColor: splashColor ??
+            Theme.of(context).primaryColor.withValues(alpha: 0.3),
         onTap: onPressed,
-        child: child,
+        child: Padding(
+          padding: padding,
+          child: child,
+        ),
       ),
     );
   }

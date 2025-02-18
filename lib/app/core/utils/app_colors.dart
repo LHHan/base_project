@@ -9,8 +9,17 @@ class AppColors {
 
   AppColors._internal();
 
-  Color colorPrimary = const Color(0xFF6200EE);
-  Color colorSecondary = const Color(0xFF03DAC6);
-  Color colorError = const Color(0xFFB00020);
-  Color colorBackground = const Color(0xFFFDFBF3);
+  Color seedColorLight = Colors.red;
+  Color seedColorDark = Colors.deepOrange;
+
+  List<Color> cardColors = [
+    const Color(0xff60656D),
+    const Color(0xff4D565F),
+    const Color(0xff464D57),
+  ];
+  List<Color> dimmedLightColors = [
+    const Color(0xff505863),
+    const Color(0xff424a53),
+    const Color(0xff343941),
+  ];
 }

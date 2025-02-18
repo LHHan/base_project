@@ -74,7 +74,7 @@ class AppStyles {
   TextStyle normalTextStyle(
     double size, {
     Color? color,
-    double? height = 1.1,
+    double? height,
     String? fontFamily,
   }) =>
       thinTextStyle(size, color: color, height: height).copyWith(
@@ -110,7 +110,7 @@ class AppStyles {
   TextStyle thinTextStyle(
     double size, {
     Color? color,
-    double? height,
+    double? height = 1.1,
     String? fontFamily,
   }) =>
       TextStyle(
