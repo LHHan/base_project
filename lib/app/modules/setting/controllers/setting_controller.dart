@@ -36,8 +36,6 @@ class SettingController extends GetxController {
         ? Get.changeTheme(AppTheme().dark)
         : Get.changeTheme(AppTheme().light);
 
-    update(['idSettingPage']);
-
     logger.i('Changed App Theme to \'${isDark.value ? 'dark' : 'light'}\'');
   }
 }
