@@ -1,4 +1,4 @@
-import 'package:base_project_getx/app/core/utils/app_style.dart';
+import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/modules/setting/widgets/w_setting_account_info.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:base_project_getx/app/widgets/w_button_rounded.dart';
@@ -29,7 +29,7 @@ class SettingView extends GetView<SettingController> {
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0).w,
                 child: Text(
                   'screenNameSettings'.tr,
-                  style: AppStyles().mediumTextStyle(36.sp),
+                  style: Get.textTheme.tsPageName,
                 ),
               ),
 
@@ -117,10 +117,10 @@ class SettingView extends GetView<SettingController> {
                 constraints: const BoxConstraints(minHeight: 46).h,
                 child: WButtonRounded(
                   onPressed: () {},
-                  background: const ColorScheme.light().error,
+                  background: Get.theme.colorScheme.error,
                   child: Text(
                     'btnLogout'.tr,
-                    style: AppStyles().semiBoldTextStyle(20.sp),
+                    style: Get.textTheme.tsButton,
                   ),
                 ),
               ),

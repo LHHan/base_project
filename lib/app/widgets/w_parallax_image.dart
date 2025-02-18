@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:base_project_getx/app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +12,6 @@ class ParallaxImageCard extends StatelessWidget {
 
   BoxDecoration get _parallaxUrlImageDecoration => BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        color: AppColors().hintColor,
         boxShadow: const [
           BoxShadow(
             color: Colors.black26,

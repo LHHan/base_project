@@ -1,6 +1,9 @@
 /* Define app extension */
 import 'dart:math';
 
+import 'package:base_project_getx/app/core/utils/app_style.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 /// Extension for screen util
@@ -276,4 +279,32 @@ extension ListExtensions<E> on List<E> {
     }
     return sb;
   }
+}
+
+/// Extension for TextTheme
+extension TextThemeExtensions on TextTheme {
+  // TextStyle for page name
+  TextStyle get tsPageName => AppStyles().blackTextStyle(40.sp);
+
+  // TextStyle for label
+  TextStyle get tsLabel => AppStyles().normalTextStyle(28.sp);
+
+  // TextStyle for title
+  TextStyle get tsTitle => AppStyles().normalTextStyle(20.sp);
+
+  // TextStyle for subTitle
+  TextStyle get tsSubTitle => AppStyles().lightTextStyle(18.sp);
+
+  // TextStyle for body, message
+  TextStyle get tsBody => AppStyles().normalTextStyle(16.sp);
+
+  // TextStyle for hint
+  TextStyle get tsHint => AppStyles().normalTextStyle(16.sp);
+
+  // TextStyle for chip
+  TextStyle get tsChip => AppStyles().normalTextStyle(14.sp);
+
+  // TextStyle for button
+  TextStyle get tsButton =>
+      AppStyles().boldTextStyle(20.sp, color: Colors.white);
 }

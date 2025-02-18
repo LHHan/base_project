@@ -1,7 +1,9 @@
+import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/p_appbar_transparency.dart';
+import '../../../widgets/w_button_rounded.dart';
 import '../controllers/isolate_controller.dart';
 
 class IsolateView extends GetView<IsolateController> {
@@ -14,10 +16,16 @@ class IsolateView extends GetView<IsolateController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            WButtonRounded(
               onPressed: controller.fetchUsersData, // Gọi hàm tải dữ liệu
-              child: const Text("Tải dữ liệu"),
+              elevation: 4,
+              child: Text(
+                "Tải dữ liệu",
+                style: Get.textTheme.tsButton,
+              ),
             ),
+
+            /// Data
             Expanded(
               child: Obx(() {
                 if (controller.isLoading.value) {

@@ -1,4 +1,4 @@
-import 'package:base_project_getx/app/core/utils/app_style.dart';
+import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class WSettingAccountInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.orangeAccent,
+        color: Get.theme.colorScheme.secondary,
         borderRadius: BorderRadius.circular(16.r),
       ),
       constraints: BoxConstraints(
@@ -31,10 +31,12 @@ class WSettingAccountInfo extends StatelessWidget {
           /// Avatar
           CircleAvatar(
             maxRadius: 70.r,
-            backgroundColor: Colors.orange.withValues(alpha: 0.4),
+            backgroundColor:
+                Get.theme.colorScheme.primary.withValues(alpha: 0.4),
             child: CircleAvatar(
               maxRadius: 55.r,
-              backgroundColor: Colors.orange.withValues(alpha: 0.5),
+              backgroundColor:
+                  Get.theme.colorScheme.primary.withValues(alpha: 0.5),
               child: CircleAvatar(
                 maxRadius: 45.r,
                 backgroundColor: Colors.white54,
@@ -60,13 +62,16 @@ class WSettingAccountInfo extends StatelessWidget {
                 /// Full name
                 Text(
                   name,
-                  style: AppStyles().semiBoldTextStyle(26.sp),
+                  style: Get.textTheme.tsBody.copyWith(
+                    fontSize: 26.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
 
                 /// Email
                 Text(
                   mail,
-                  style: AppStyles().normalTextStyle(16.sp),
+                  style: Get.textTheme.tsBody,
                 ),
               ],
             ),
