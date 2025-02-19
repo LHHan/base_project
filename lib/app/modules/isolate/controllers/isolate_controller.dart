@@ -57,7 +57,8 @@ class IsolateController extends GetxController {
       } else {
         filterUsersData.value = _usersData
             .where((item) =>
-                item.name.toLowerCase().contains(query.toLowerCase()) ||
+                item.firstName.toLowerCase().contains(query.toLowerCase()) ||
+                item.lastName.toLowerCase().contains(query.toLowerCase()) ||
                 item.id.toString().contains(query.toLowerCase()))
             .toList();
       }
@@ -67,9 +68,9 @@ class IsolateController extends GetxController {
       } else {
         filterProductsData.value = _productsData
             .where((item) =>
-                item.title!.toLowerCase().contains(query.toLowerCase()) ||
-                item.brand!.toLowerCase().contains(query.toLowerCase()) ||
-                item.category!.toString().contains(query.toLowerCase()))
+                item.title.toLowerCase().contains(query.toLowerCase()) ||
+                item.brand.toLowerCase().contains(query.toLowerCase()) ||
+                item.category.toString().contains(query.toLowerCase()))
             .toList();
       }
     }

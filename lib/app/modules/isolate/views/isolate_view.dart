@@ -60,7 +60,7 @@ class IsolateView extends GetView<IsolateController> {
       ),
     );
   }
- 
+
   Widget _buildSegmentContent() {
     switch (controller.selectedSegment.value) {
       case 1:

@@ -1,6 +1,5 @@
 import 'package:base_project_getx/app/modules/isolate/controllers/isolate_controller.dart';
 import 'package:base_project_getx/app/widgets/p_material.dart';
-import 'package:base_project_getx/app/widgets/w_keep_alive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,9 +20,13 @@ base class WSegmentUsers extends GetView<IsolateController> {
                 itemCount: controller.filterUsersData.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(controller.filterUsersData[index].name),
-                    subtitle:
-                        Text("ID: ${controller.filterUsersData[index].id}"),
+                    title: Text(
+                        '${controller.filterUsersData[index].firstName} ${controller.filterUsersData[index].lastName}'),
+                    subtitle: Text(
+                        "${controller.filterUsersData[index].address.address} - ${controller.filterUsersData[index].address.city}"),
+                    leading: Image.network(
+                      controller.filterUsersData[index].image,
+                    ),
                   );
                 },
               );
