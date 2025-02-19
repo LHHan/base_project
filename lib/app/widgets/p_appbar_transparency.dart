@@ -3,24 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PAppbarTransparency extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
+  final Widget? body;
   final Color? forceBackgroundColor;
 
   const PAppbarTransparency({
-    Key? key,
-    required this.child,
+    super.key,
+    this.child,
+    this.body,
     this.forceBackgroundColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return PMaterial(
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        child: Scaffold(
-          backgroundColor: forceBackgroundColor,
-          body: child,
-        ),
+        child: child ??
+            Scaffold(
+              backgroundColor: forceBackgroundColor,
+              body: body,
+            ),
       ),
     );
   }
