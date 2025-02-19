@@ -19,7 +19,7 @@ class SettingView extends GetView<SettingController> {
   @override
   Widget build(BuildContext context) {
     return PAppbarTransparency(
-      child: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,10 +1,14 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
-import 'package:flutter/material.dart';
+import 'package:base_project_getx/app/modules/isolate/widgets/w_segment_products.dart';
+import 'package:base_project_getx/app/widgets/w_keep_alive.dart';
+import 'package:base_project_getx/app/widgets/w_keyboard_dismiss.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/p_appbar_transparency.dart';
-import '../../../widgets/w_button_rounded.dart';
 import '../controllers/isolate_controller.dart';
+import '../widgets/w_segment_users.dart';
 
 class IsolateView extends GetView<IsolateController> {
   const IsolateView({super.key});
@@ -12,39 +16,57 @@ class IsolateView extends GetView<IsolateController> {
   @override
   Widget build(BuildContext context) {
     return PAppbarTransparency(
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            WButtonRounded(
-              onPressed: controller.fetchUsersData, // Gọi hàm tải dữ liệu
-              elevation: 4,
-              child: Text(
-                "Tải dữ liệu",
-                style: Get.textTheme.tsButton,
+      child: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Obx(
+            () => CupertinoSegmentedControl<int>(
+              children: {
+                0: Padding(
+                  padding: EdgeInsets.all(8).r,
+                  child: Text(
+                    "Users",
+                    style: Get.textTheme.tsTitle,
+                  ),
+                ),
+                1: Padding(
+                  padding: EdgeInsets.all(8).r,
+                  child: Text(
+                    "Products",
+                    style: Get.textTheme.tsTitle,
+                  ),
+                ),
+              },
+              onValueChanged: (int value) =>
+                  controller.onChangedSegment(segment: value),
+              groupValue: controller.selectedSegment.value,
+            ),
+          ),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CupertinoSearchTextField(
+                onChanged: (value) => controller.onSearchData(query: value),
+                onSubmitted: (value) => controller.onSearchData(query: value),
               ),
             ),
-
-            /// Data
-            Expanded(
-              child: Obx(() {
-                if (controller.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return ListView.builder(
-                  itemCount: controller.users.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(controller.users[index].name),
-                      subtitle: Text("ID: ${controller.users[index].id}"),
-                    );
-                  },
-                );
-              }),
-            ),
-          ],
+          ),
+        ),
+        child: WKeyboardDismiss(
+          child: SafeArea(
+            child: Obx(() => _buildSegmentContent()),
+          ),
         ),
       ),
     );
+  }
+ 
+  Widget _buildSegmentContent() {
+    switch (controller.selectedSegment.value) {
+      case 1:
+        return WKeepAlive(child: WSegmentProducts());
+      default:
+        return WKeepAlive(child: WSegmentUsers());
+    }
   }
 }

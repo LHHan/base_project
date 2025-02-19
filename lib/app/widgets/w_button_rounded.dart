@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class WButtonRounded extends StatelessWidget {
   const WButtonRounded({
-    Key? key,
+    super.key,
     required this.child,
     this.radius = 8.0,
     required this.onPressed,
@@ -14,7 +14,7 @@ class WButtonRounded extends StatelessWidget {
     this.elevation = 0.0,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
     this.minimumSize = const Size(64, 36),
-  }) : super(key: key);
+  });
 
   final Widget child;
   final double radius;
