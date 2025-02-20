@@ -1,3 +1,4 @@
+import 'package:base_project_getx/app/modules/setting/views/setting_view.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:base_project_getx/app/widgets/w_bottom_nav_bar.dart';
 import 'package:base_project_getx/app/widgets/w_keep_alive.dart';
@@ -7,7 +8,6 @@ import 'package:get/get.dart';
 import '../../chat/views/chat_view.dart';
 import '../../feed/views/feed_view.dart';
 import '../../notifications/views/notifications_view.dart';
-import '../../profile/views/profile_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -23,7 +23,7 @@ class HomeView extends GetView<HomeController> {
             WKeepAlive(child: FeedView()),
             WKeepAlive(child: ChatView()),
             WKeepAlive(child: NotificationsView()),
-            WKeepAlive(child: ProfileView()),
+            WKeepAlive(child: SettingView()),
           ],
         ),
         bottomNavigationBar: Obx(

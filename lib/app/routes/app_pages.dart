@@ -35,10 +35,16 @@ class AppPages {
       binding: OnboardingBinding(),
     ),
     GetPage(
-      name: _Paths.HOME,
-      page: () => const HomeView(),
-      binding: HomeBinding(),
-    ),
+        name: _Paths.HOME,
+        page: () => const HomeView(),
+        binding: HomeBinding(),
+        bindings: [
+          FeedBinding(),
+          ChatBinding(),
+          NotificationsBinding(),
+          ProfileBinding(),
+          SettingBinding(),
+        ]),
     GetPage(
       name: _Paths.SETTING,
       page: () => const SettingView(),
