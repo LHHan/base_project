@@ -16,8 +16,8 @@ class WBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20).r,
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10).r,
+      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20).r,
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15).r,
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(30.r),
@@ -49,7 +49,7 @@ class WBottomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTabSelected(index),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         padding: EdgeInsets.all(10.r),
         decoration: BoxDecoration(
@@ -62,19 +62,21 @@ class WBottomNavBar extends StatelessWidget {
           strokeWidth: 2.r,
           borderRadius: 14.r,
           child: AnimatedScale(
-            scale: isSelected ? 1.2 : 1.0,
-            duration: Duration(milliseconds: 300),
+            scale: isSelected ? 1.25 : 1.0,
+            duration: const Duration(milliseconds: 250),
             curve: Curves.easeInOut,
-            child: isAvatar
-                ? CircleAvatar(
-                    radius: 14.r,
-                    backgroundImage: AssetImage(AppAssets().imDog),
-                  )
-                : Icon(
-                    icon,
-                    size: 28.r,
-                    color: isSelected ? Colors.blue : Colors.grey.shade500,
-                  ),
+            child: CircleAvatar(
+              radius: isSelected ? 16.r : 14.r,
+              backgroundImage: isAvatar ? AssetImage(AppAssets().imDog) : null,
+              backgroundColor: Colors.transparent,
+              child: isAvatar
+                  ? null
+                  : Icon(
+                      icon,
+                      size: 28.r,
+                      color: isSelected ? Colors.blue : Colors.grey.shade500,
+                    ),
+            ),
           ),
         ),
       ),
