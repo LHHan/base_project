@@ -1,13 +1,14 @@
-import 'package:base_project_getx/app/modules/setting/views/setting_view.dart';
-import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
-import 'package:base_project_getx/app/widgets/w_bottom_nav_bar.dart';
-import 'package:base_project_getx/app/widgets/w_keep_alive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/p_appbar_transparency.dart';
+import '../../../widgets/w_bottom_nav_bar.dart';
+import '../../../widgets/w_keep_alive.dart';
 import '../../chat/views/chat_view.dart';
 import '../../feed/views/feed_view.dart';
 import '../../notifications/views/notifications_view.dart';
+import '../../setting/views/setting_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -17,43 +18,33 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return PAppbarTransparency(
       child: Scaffold(
-        body: PageView(
-          controller: controller.pageController,
+        body: Stack(
           children: [
-            WKeepAlive(child: FeedView()),
-            WKeepAlive(child: ChatView()),
-            WKeepAlive(child: NotificationsView()),
-            WKeepAlive(child: SettingView()),
+            PageView(
+              controller: controller.pageController,
+              children: [
+                WKeepAlive(child: FeedView()),
+                WKeepAlive(child: ChatView()),
+                WKeepAlive(child: NotificationsView()),
+                WKeepAlive(child: SettingView()),
+              ],
+            ),
+
+            // Floating Bottom Navigation Bar
+            Positioned(
+              bottom: 20.h,
+              left: 20.w,
+              right: 20.w,
+              child: Obx(
+                () => WBottomNavBar(
+                  currentIndex: controller.currentIndex.value,
+                  onTabSelected: controller.onChangePageIndex,
+                ),
+              ),
+            ),
           ],
         ),
-        bottomNavigationBar: Obx(
-          () => WBottomNavBar(
-            currentIndex: controller.currentIndex.value,
-            onTabSelected: (index) => controller.onChangePageIndex(index),
-          ),
-        ),
       ),
-
-      // child: CupertinoTabScaffold(
-      //   tabBar: CupertinoTabBar(
-      //     items: const [
-      //       BottomNavigationBarItem(
-      //           icon: Icon(CupertinoIcons.news), label: 'Feed'),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(CupertinoIcons.chat_bubble), label: 'Chat'),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(CupertinoIcons.bell), label: 'Notifications'),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(CupertinoIcons.person), label: 'Profile'),
-      //     ],
-      //     onTap: (value) => controller.onChangeTabIndex(value),
-      //   ),
-      //   tabBuilder: (context, index) {
-      //     return CupertinoTabView(
-      //       builder: (context) => controller.screens[index],
-      //     );
-      //   },
-      // ),
     );
   }
 }

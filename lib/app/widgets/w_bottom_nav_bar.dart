@@ -1,4 +1,5 @@
 import 'package:base_project_getx/app/core/utils/app_asset.dart';
+import 'package:base_project_getx/app/core/utils/app_const.dart';
 import 'package:base_project_getx/app/widgets/w_dashed_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,8 +17,10 @@ class WBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20).r,
+      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20).r,
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15).r,
+      constraints:
+          BoxConstraints(maxHeight: AppConstant().kBottomNavigationBarHeight.h),
       decoration: BoxDecoration(
         color: Color(0xFF1A1A2E),
         borderRadius: BorderRadius.circular(50.r),

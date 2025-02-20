@@ -7,12 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/app_asset.dart';
+import '../../../core/utils/app_const.dart';
 import '../controllers/setting_controller.dart';
 import '../widgets/w_setting_item.dart';
 import '../widgets/w_setting_region.dart';
 
 class SettingView extends GetView<SettingController> {
-  const SettingView({Key? key}) : super(key: key);
+  const SettingView({super.key});
 
   static final kPadding = const EdgeInsets.fromLTRB(10, 0, 10, 0).w;
 
@@ -20,6 +21,9 @@ class SettingView extends GetView<SettingController> {
   Widget build(BuildContext context) {
     return PAppbarTransparency(
       body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom +
+                AppConstant().kBottomNavigationBarHeight.h),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
