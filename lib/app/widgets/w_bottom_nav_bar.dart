@@ -19,14 +19,14 @@ class WBottomNavBar extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20).r,
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15).r,
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.9),
-        borderRadius: BorderRadius.circular(30.r),
+        color: Color(0xFF1A1A2E),
+        borderRadius: BorderRadius.circular(50.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.purple.withValues(alpha: 0.4),
             blurRadius: 10,
             spreadRadius: 2,
-            offset: Offset(0, 4),
+            offset: Offset(0, 5),
           ),
         ],
       ),
@@ -51,12 +51,22 @@ class WBottomNavBar extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(2.r),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: Color(0xFFA020F0).withValues(alpha: 0.4),
+                    blurRadius: 30,
+                    spreadRadius: 4,
+                    offset: Offset(0, 10),
+                  ),
+                ]
+              : [],
         ),
         child: WDashedBox(
-          color: isSelected ? Colors.blue : Colors.grey.shade400,
+          color: isSelected ? Color(0xFFA020F0) : Color(0xFFB0BEC5),
           dashWidth: 6.r,
           dashSpace: 4.r,
           strokeWidth: 2.r,
@@ -74,7 +84,7 @@ class WBottomNavBar extends StatelessWidget {
                   : Icon(
                       icon,
                       size: 28.r,
-                      color: isSelected ? Colors.blue : Colors.grey.shade500,
+                      color: Color(0xFFC0C0C0),
                     ),
             ),
           ),
