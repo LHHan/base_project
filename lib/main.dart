@@ -33,7 +33,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -108,12 +108,12 @@ Future<void> _loadEnvironment() async {
 }
 
 Future<void> _initialService() async {
-  /// GetStorage service
-  await GetStorage.init();
+  /// Api service
+  Get.lazyPut(() => ApiService());
 
   /// Authentication service
-  Get.put(AuthService());
+  Get.lazyPut(() => AuthService());
 
-  /// Api service
-  Get.put(ApiService());
+  /// GetStorage service
+  await GetStorage.init();
 }

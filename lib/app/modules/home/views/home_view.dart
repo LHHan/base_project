@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/p_appbar_transparency.dart';
-import '../../../widgets/w_bottom_nav_bar.dart';
+import '../../../widgets/w_bottom_nav_bar_dynamic.dart';
 import '../../../widgets/w_keep_alive.dart';
 import '../../chat/views/chat_view.dart';
 import '../../feed/views/feed_view.dart';
@@ -22,6 +22,7 @@ class HomeView extends GetView<HomeController> {
           children: [
             PageView(
               controller: controller.pageController,
+              onPageChanged: (index) => controller.onPageChanged(index),
               children: [
                 WKeepAlive(child: FeedView()),
                 WKeepAlive(child: ChatView()),
@@ -36,9 +37,11 @@ class HomeView extends GetView<HomeController> {
               left: 20.w,
               right: 20.w,
               child: Obx(
-                () => WBottomNavBar(
+                () => WBottomNavBarDynamic(
                   currentIndex: controller.currentIndex.value,
-                  onTabSelected: controller.onChangePageIndex,
+                  onTabSelected: controller.onTabSelected,
+                  showLogout: controller.isScrolledToBottomInSettingPage.value,
+                  onLogoutPressed: controller.onPressedBtnLogout,
                 ),
               ),
             ),

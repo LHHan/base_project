@@ -1,3 +1,4 @@
+import 'package:base_project_getx/app/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,12 +7,15 @@ class HomeController extends GetxController
   /// ********
   /// #region define service, provider
   /// ********
+  final _apiService = ApiService.defined;
 
   /// ********
   /// #region define variables
   /// ********
   var currentIndex = 0.obs;
   final PageController pageController = PageController();
+
+  var isScrolledToBottomInSettingPage = false.obs;
 
   /// ********
   /// #region implement app lifecycle
@@ -34,16 +38,34 @@ class HomeController extends GetxController
   /// ********
   /// #region define public functions
   /// ********
-  void onChangePageIndex(int index) {
-    // update currentIndex
+
+  /// When swiping PageView, update currentIndex
+  void onPageChanged(int index) {
     currentIndex.value = index;
 
-    // animate to page
-    pageController.animateToPage(
-      index,
-      duration: Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
+    if (index != 3 && isScrolledToBottomInSettingPage.value) {
+      updateUIBottomNavBar(isBottom: false);
+    }
+  }
+
+  /// When clicking on BottomNavigation, switch to the corresponding page
+  void onTabSelected(int index) {
+    if (index != currentIndex.value) {
+      pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+      currentIndex.value = index;
+    }
+  }
+
+  void onPressedBtnLogout({bool isBottom = false}) {
+    _apiService.logout();
+  }
+
+  void updateUIBottomNavBar({bool isBottom = false}) {
+    isScrolledToBottomInSettingPage.value = isBottom;
   }
 
   /// ********

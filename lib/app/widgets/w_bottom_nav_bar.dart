@@ -34,14 +34,16 @@ class WBottomNavBar extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _navItem(icon: Icons.home, index: 0),
-            _navItem(icon: Icons.chat_bubble, index: 1),
-            _navItem(icon: Icons.notifications, index: 2),
-            _navItem(icon: Icons.person, index: 3, isAvatar: true),
-          ],
+        child: IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _navItem(icon: Icons.home, index: 0),
+              _navItem(icon: Icons.chat_bubble, index: 1),
+              _navItem(icon: Icons.notifications, index: 2),
+              _navItem(icon: Icons.person, index: 3, isAvatar: true),
+            ],
+          ),
         ),
       ),
     );
