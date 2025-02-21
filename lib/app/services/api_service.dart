@@ -215,8 +215,17 @@ class ApiService extends GetxService {
     return this;
   }
 
+  static ApiService get defined => Get.find<ApiService>();
+
+  Future<void> logout() async {
+    _logout();
+  }
+
   void _logout() {
     _clearTokens();
+
+    box.erase();
+
     if (kDebugMode) logger.i('🚪 Logging out... Redirecting to login screen.');
 
     Get.offAllNamed(Routes.HOME);

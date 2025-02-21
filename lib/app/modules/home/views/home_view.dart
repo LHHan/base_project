@@ -1,114 +1,47 @@
-import 'package:base_project_getx/app/core/utils/app_asset.dart';
-import 'package:base_project_getx/app/core/utils/app_config.dart';
-import 'package:base_project_getx/app/core/utils/app_enum.dart';
-import 'package:base_project_getx/app/core/utils/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/p_appbar_transparency.dart';
+import '../../../widgets/w_bottom_nav_bar_dynamic.dart';
+import '../../../widgets/w_keep_alive.dart';
+import '../../chat/views/chat_view.dart';
+import '../../feed/views/feed_view.dart';
+import '../../notifications/views/notifications_view.dart';
+import '../../setting/views/setting_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return PAppbarTransparency(
+      child: Scaffold(
+        body: Stack(
           children: [
-            const Spacer(),
-            Center(
-              child: Text(
-                '${'hello'.tr} ${AppConfig.I.env.envType == EnvType.dev ? 'DEV' : 'PROD'}',
-                style: AppStyles().normalTextStyle(20),
-              ),
+            PageView(
+              controller: controller.pageController,
+              onPageChanged: (index) => controller.onPageChanged(index),
+              children: [
+                WKeepAlive(child: FeedView()),
+                WKeepAlive(child: ChatView()),
+                WKeepAlive(child: NotificationsView()),
+                WKeepAlive(child: SettingView()),
+              ],
             ),
-            const Spacer(),
 
-            /// Change App Theme Card
-            Card(
-              elevation: 4,
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                constraints: const BoxConstraints(minHeight: 65),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'changeAppTheme'.tr,
-                        style: AppStyles().normalTextStyle(18),
-                      ),
-                    ),
-                    GetBuilder(
-                      id: 'changeAppTheme',
-                      init: controller,
-                      builder: (control) {
-                        return IconButton(
-                          onPressed: () => controller.onChangeAppTheme(),
-                          icon: Icon(
-                            Icons.lightbulb,
-                            color:
-                                controller.isDark ? Colors.grey : Colors.yellow,
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 50),
-
-            /// Change App Locale Card
-            Card(
-              elevation: 4,
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                constraints: BoxConstraints(minHeight: 65, minWidth: Get.width),
-                child: Stack(
-                  alignment: Alignment.centerLeft,
-                  children: [
-                    Text(
-                      'changeAppLocale'.tr,
-                      style: AppStyles().normalTextStyle(18),
-                    ),
-                    Positioned(
-                      right: -13,
-                      child: InkWell(
-                        onTap: controller.onChangeAppLocale,
-                        borderRadius: BorderRadius.circular(55),
-                        child: Padding(
-                          padding: const EdgeInsets.all(22),
-                          child: GetBuilder(
-                            id: 'changeAppLocale',
-                            init: controller,
-                            builder: (control) => Image.asset(
-                              controller.selectedLocale == LocaleCode.en.name
-                                  ? AppAssets().imFlagEn
-                                  : AppAssets().imFlagVi,
-                              width: 25,
-                              height: 25,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+            // Floating Bottom Navigation Bar
+            Positioned(
+              bottom: 16.h,
+              left: 20.w,
+              right: 20.w,
+              child: Obx(
+                () => WBottomNavBarDynamic(
+                  currentIndex: controller.currentIndex.value,
+                  onTabSelected: controller.onTabSelected,
+                  showLogout: controller.isScrolledToBottomInSettingPage.value,
+                  onLogoutPressed: controller.onPressedBtnLogout,
                 ),
               ),
             ),

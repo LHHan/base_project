@@ -1,32 +1,74 @@
-import 'package:base_project_getx/app/core/utils/app_theme.dart';
-import 'package:base_project_getx/app/core/utils/app_enum.dart';
+import 'package:base_project_getx/app/services/api_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/app_log.dart';
-import '../../../services/localization_service.dart';
+class HomeController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  /// ********
+  /// #region define service, provider
+  /// ********
+  final _apiService = ApiService.defined;
 
-class HomeController extends GetxController {
+  /// ********
   /// #region define variables
-  bool isDark = Get.isDarkMode;
-  String selectedLocale = LocalizationService.locale.languageCode;
+  /// ********
+  var currentIndex = 0.obs;
+  final PageController pageController = PageController();
 
-  /// #region define functions
-  void onChangeAppTheme() {
-    isDark
-        ? Get.changeTheme(AppTheme().light)
-        : Get.changeTheme(AppTheme().dark);
-    isDark = !isDark;
-    update(['changeAppTheme']);
-    logger.i('Changed App Theme to \'${isDark ? 'dark' : 'light'}\'');
+  var isScrolledToBottomInSettingPage = false.obs;
+
+  /// ********
+  /// #region implement app lifecycle
+  /// ********
+  @override
+  void onInit() {
+    super.onInit();
   }
 
-  void onChangeAppLocale() {
-    selectedLocale = selectedLocale == LocaleCode.en.name
-        ? LocaleCode.vi.name
-        : LocaleCode.en.name;
-
-    LocalizationService.changeLocale(selectedLocale);
-    update(['changeAppLocale']);
-    logger.i('Changed App Locale to $selectedLocale');
+  @override
+  void onReady() {
+    super.onReady();
   }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
+  /// ********
+  /// #region define public functions
+  /// ********
+
+  /// When swiping PageView, update currentIndex
+  void onPageChanged(int index) {
+    currentIndex.value = index;
+
+    if (index != 3 && isScrolledToBottomInSettingPage.value) {
+      updateUIBottomNavBar(isBottom: false);
+    }
+  }
+
+  /// When clicking on BottomNavigation, switch to the corresponding page
+  void onTabSelected(int index) {
+    if (index != currentIndex.value) {
+      pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+      currentIndex.value = index;
+    }
+  }
+
+  void onPressedBtnLogout({bool isBottom = false}) {
+    _apiService.logout();
+  }
+
+  void updateUIBottomNavBar({bool isBottom = false}) {
+    isScrolledToBottomInSettingPage.value = isBottom;
+  }
+
+  /// ********
+  /// #region define private functions
+  /// ********
 }

@@ -45,28 +45,32 @@ class IsolateView extends GetView<IsolateController> {
             preferredSize: Size.fromHeight(50),
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: CupertinoSearchTextField(
-                onChanged: (value) => controller.onSearchData(query: value),
-                onSubmitted: (value) => controller.onSearchData(query: value),
+              child: Obx(
+                () => CupertinoSearchTextField(
+                  controller: controller.selectedSegment.value == 0
+                      ? controller.tecSearchUsers
+                      : controller.tecSearchProducts,
+                  onChanged: (value) => controller.onSearchData(query: value),
+                  onSubmitted: (value) => controller.onSearchData(query: value),
+                ),
               ),
             ),
           ),
         ),
         child: WKeyboardDismiss(
           child: SafeArea(
-            child: Obx(() => _buildSegmentContent()),
+            child: PageView(
+              controller: controller.pageController,
+              onPageChanged: (index) =>
+                  controller.selectedSegment.value = index,
+              children: [
+                WKeepAlive(child: WSegmentUsers()),
+                WKeepAlive(child: WSegmentProducts()),
+              ],
+            ),
           ),
         ),
       ),
     );
-  }
- 
-  Widget _buildSegmentContent() {
-    switch (controller.selectedSegment.value) {
-      case 1:
-        return WKeepAlive(child: WSegmentProducts());
-      default:
-        return WKeepAlive(child: WSegmentUsers());
-    }
   }
 }

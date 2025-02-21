@@ -1,18 +1,18 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/modules/setting/widgets/w_setting_account_info.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
-import 'package:base_project_getx/app/widgets/w_button_rounded.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/app_asset.dart';
+import '../../../core/utils/app_const.dart';
 import '../controllers/setting_controller.dart';
 import '../widgets/w_setting_item.dart';
 import '../widgets/w_setting_region.dart';
 
 class SettingView extends GetView<SettingController> {
-  const SettingView({Key? key}) : super(key: key);
+  const SettingView({super.key});
 
   static final kPadding = const EdgeInsets.fromLTRB(10, 0, 10, 0).w;
 
@@ -20,6 +20,10 @@ class SettingView extends GetView<SettingController> {
   Widget build(BuildContext context) {
     return PAppbarTransparency(
       body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        controller: controller.scrollController,
+        padding:
+            EdgeInsets.only(bottom: AppConstant().kBottomNavigationBarHeight.h),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -108,24 +112,6 @@ class SettingView extends GetView<SettingController> {
                   ],
                 ),
               ),
-
-              50.verticalSpace,
-
-              /// Logout
-              Container(
-                padding: kPadding,
-                constraints: const BoxConstraints(minHeight: 46).h,
-                child: WButtonRounded(
-                  onPressed: () {},
-                  background: Get.theme.colorScheme.error,
-                  child: Text(
-                    'btnLogout'.tr,
-                    style: Get.textTheme.tsButton,
-                  ),
-                ),
-              ),
-
-              30.verticalSpace,
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:base_project_getx/app/core/utils/app_log.dart';
 import 'package:base_project_getx/app/data/models/product_model.dart';
 import 'package:base_project_getx/app/data/providers/user_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/user_model.dart';
@@ -17,6 +18,10 @@ class IsolateController extends GetxController {
   var filterProductsData = <ProductModel>[].obs;
 
   var selectedSegment = 0.obs;
+  final PageController pageController = PageController();
+
+  final TextEditingController tecSearchUsers = TextEditingController();
+  final TextEditingController tecSearchProducts = TextEditingController();
 
   var isLoading = false.obs;
 
@@ -44,6 +49,10 @@ class IsolateController extends GetxController {
 
   @override
   void onClose() {
+    pageController.dispose();
+    tecSearchUsers.dispose();
+    tecSearchProducts.dispose();
+
     super.onClose();
     logger.i("onClose(): Hủy listener, giải phóng tài nguyên");
   }
@@ -57,7 +66,8 @@ class IsolateController extends GetxController {
       } else {
         filterUsersData.value = _usersData
             .where((item) =>
-                item.name.toLowerCase().contains(query.toLowerCase()) ||
+                item.firstName.toLowerCase().contains(query.toLowerCase()) ||
+                item.lastName.toLowerCase().contains(query.toLowerCase()) ||
                 item.id.toString().contains(query.toLowerCase()))
             .toList();
       }
@@ -67,9 +77,9 @@ class IsolateController extends GetxController {
       } else {
         filterProductsData.value = _productsData
             .where((item) =>
-                item.title!.toLowerCase().contains(query.toLowerCase()) ||
-                item.brand!.toLowerCase().contains(query.toLowerCase()) ||
-                item.category!.toString().contains(query.toLowerCase()))
+                item.title.toLowerCase().contains(query.toLowerCase()) ||
+                item.brand.toLowerCase().contains(query.toLowerCase()) ||
+                item.category.toString().contains(query.toLowerCase()))
             .toList();
       }
     }
@@ -79,6 +89,16 @@ class IsolateController extends GetxController {
 
   Future<void> onChangedSegment({required int segment}) async {
     selectedSegment.value = segment;
+    pageController.animateToPage(
+      segment,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+
+    onSearchData(
+        query: selectedSegment.value == 0
+            ? tecSearchUsers.text
+            : tecSearchProducts.text);
   }
 
   Future<void> fetchUsersData() async {
