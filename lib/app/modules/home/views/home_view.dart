@@ -32,7 +32,7 @@ class HomeView extends GetView<HomeController> {
 
             // Floating Bottom Navigation Bar
             Positioned(
-              bottom: 20.h,
+              bottom: 16.h,
               left: 20.w,
               right: 20.w,
               child: Obx(

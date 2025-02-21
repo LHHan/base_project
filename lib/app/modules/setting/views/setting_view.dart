@@ -21,9 +21,8 @@ class SettingView extends GetView<SettingController> {
   Widget build(BuildContext context) {
     return PAppbarTransparency(
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).padding.bottom +
-                AppConstant().kBottomNavigationBarHeight.h),
+        padding:
+            EdgeInsets.only(bottom: AppConstant().kBottomNavigationBarHeight.h),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

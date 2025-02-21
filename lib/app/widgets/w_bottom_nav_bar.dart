@@ -16,31 +16,33 @@ class WBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20).r,
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15).r,
-      constraints:
-          BoxConstraints(maxHeight: AppConstant().kBottomNavigationBarHeight.h),
-      decoration: BoxDecoration(
-        color: Color(0xFF1A1A2E),
-        borderRadius: BorderRadius.circular(50.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.purple.withValues(alpha: 0.4),
-            blurRadius: 10,
-            spreadRadius: 2,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _navItem(icon: Icons.home, index: 0),
-          _navItem(icon: Icons.chat_bubble, index: 1),
-          _navItem(icon: Icons.notifications, index: 2),
-          _navItem(icon: Icons.person, index: 3, isAvatar: true),
-        ],
+    return SafeArea(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20).r,
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15).r,
+        constraints: BoxConstraints(
+            maxHeight: AppConstant().kBottomNavigationBarHeight.h),
+        decoration: BoxDecoration(
+          color: Color(0xFF1A1A2E),
+          borderRadius: BorderRadius.circular(50.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withValues(alpha: 0.4),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _navItem(icon: Icons.home, index: 0),
+            _navItem(icon: Icons.chat_bubble, index: 1),
+            _navItem(icon: Icons.notifications, index: 2),
+            _navItem(icon: Icons.person, index: 3, isAvatar: true),
+          ],
+        ),
       ),
     );
   }
