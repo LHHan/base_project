@@ -25,7 +25,12 @@ class Token {
         'refresh_token': refreshToken,
       };
 
-  static const String localKey = 'keyToken';
+  factory Token.empty() => Token(
+        tokenType: '',
+        expiresIn: -1,
+        accessToken: '',
+        refreshToken: '',
+      );
 
-  String logged() => 'keyToken';
+  static const String localKey = 'keyToken';
 }

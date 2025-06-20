@@ -9,6 +9,7 @@ class AuthService extends GetxService {
 
   /// Token
   Token? _token;
+
   get token => _token;
 
   @override
@@ -32,4 +33,8 @@ class AuthService extends GetxService {
   }
 
   bool logged() => _token != null;
+
+  void clear() {
+    _token = Token.empty();
+  }
 }

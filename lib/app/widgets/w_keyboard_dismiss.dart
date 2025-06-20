@@ -5,8 +5,8 @@ class WKeyboardDismiss extends StatelessWidget {
   const WKeyboardDismiss({
     required this.child,
     this.unFocus,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
   final Function()? unFocus;

@@ -15,6 +15,7 @@ class ApiService extends GetxService {
   String? _accessToken;
   String? _refreshToken;
   bool _isRefreshing = false;
+  bool _isTokenLoaded = false;
   Future<void>? _refreshFuture;
 
   final box = GetStorage();
@@ -39,6 +40,11 @@ class ApiService extends GetxService {
       [
         QueuedInterceptorsWrapper(
           onRequest: (options, handler) {
+            // 🔥 Only load tokens when really needed
+            if (!_isTokenLoaded) {
+              _loadTokens();
+            }
+
             if (_accessToken != null) {
               options.headers['Authorization'] = 'Bearer $_accessToken';
             }
@@ -91,9 +97,8 @@ class ApiService extends GetxService {
   void _loadTokens() {
     _accessToken = box.read<String>('accessToken');
     _refreshToken = box.read<String>('refreshToken');
-    if (kDebugMode) {
-      logger.i("🔄 Loaded tokens: $_accessToken, $_refreshToken");
-    }
+    _isTokenLoaded = true;
+    logger.i("🔄 Loaded tokens: $_accessToken, $_refreshToken");
   }
 
   /// 🔹 Set accessToken, refreshToken
@@ -105,9 +110,9 @@ class ApiService extends GetxService {
     box.write('accessToken', accessToken);
     box.write('refreshToken', refreshToken);
 
-    if (kDebugMode) {
-      logger.i("✅ Tokens saved: $accessToken, $refreshToken");
-    }
+    _isTokenLoaded = false;
+
+    logger.i("✅ Tokens saved: $accessToken, $refreshToken");
   }
 
   /// 🔹 Clear accessToken, refreshToken
@@ -158,7 +163,7 @@ class ApiService extends GetxService {
             "⚠️ Something went wrong: ${error.message}");
   }
 
-  /// 🔹 Xử lý refresh token khi bị 401
+  /// 🔹 Handle refresh token when 401
   Future<bool> _handleRefreshToken() async {
     if (_isRefreshing) {
       await _refreshFuture;
@@ -167,6 +172,7 @@ class ApiService extends GetxService {
 
     if (_refreshToken == null || _refreshToken!.isEmpty) {
       if (kDebugMode) logger.e('⚠️ No refresh token available.');
+      _logout();
       return false;
     }
 
