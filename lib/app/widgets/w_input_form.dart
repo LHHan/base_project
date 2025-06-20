@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class WInputForm extends StatelessWidget {
   const WInputForm({
-    Key? key,
+    super.key,
     this.controller,
     this.labelText,
     this.hintText,
@@ -29,7 +29,7 @@ class WInputForm extends StatelessWidget {
     this.focusedBorder,
     this.errorBorder,
     this.maxLines = 1,
-  }) : super(key: key);
+  });
 
   const WInputForm.email({
     Key? key,

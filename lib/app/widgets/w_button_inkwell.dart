@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class WButtonInkwell extends StatelessWidget {
   const WButtonInkwell({
-    Key? key,
+    super.key,
     required this.child,
     required this.onPressed,
     this.splashColor,
     this.borderRadius = BorderRadius.zero,
     this.padding = const EdgeInsets.all(8),
-  }) : super(key: key);
+  });
 
   final Widget child;
   final Function()? onPressed;
