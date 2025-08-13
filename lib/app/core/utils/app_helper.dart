@@ -3,6 +3,9 @@
 import 'dart:convert';
 import 'dart:isolate';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 class AppHelper {
   static final AppHelper _singleton = AppHelper._internal();
 
@@ -11,6 +14,41 @@ class AppHelper {
   }
 
   AppHelper._internal();
+
+  /// #region snack bar
+  /// -----------------
+  // error
+  static void showErrorMessage(String error) {
+    Get.snackbar(
+      'labelError'.tr,
+      error,
+      icon: const Icon(
+        Icons.error,
+        color: Color(0xFFB00020),
+      ),
+      shouldIconPulse: true,
+      onTap: (snack) => {},
+      isDismissible: true,
+      duration: const Duration(seconds: 3),
+    );
+  }
+
+  // success
+  static void showSuccessMessage(String message, {Color? backgroundColor}) {
+    Get.snackbar(
+      'labelOK'.tr,
+      message,
+      icon: const Icon(
+        Icons.check_circle,
+        color: Color(0xFF477256),
+      ),
+      backgroundColor: backgroundColor,
+      shouldIconPulse: true,
+      onTap: (snack) => {},
+      isDismissible: true,
+      duration: const Duration(seconds: 3),
+    );
+  }
 
   // Function parse JSON to List<T> with isolate
   Future<List<T>> parseJsonWithIsolate<T>(

@@ -23,4 +23,8 @@ class AppAssets {
   String imFlagVi = 'assets/app/images/im_flag_vi.png';
   String imFlagEn = 'assets/app/images/im_flag_us.png';
   String imDog = 'assets/app/images/im_dog.jpg';
+
+  /// #region Lottie
+  /// ----------------
+  String lotLoading = 'assets/app/lottie/';
 }

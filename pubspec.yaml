@@ -19,6 +19,8 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   google_fonts: ^6.2.1
   intl: ^0.20.2
+  lottie: ^3.3.1
+
   flutter:
     sdk: flutter
 
@@ -37,6 +39,7 @@ flutter:
     - assets/app/fonts/
     - assets/app/icons/
     - assets/app/images/
+    - assets/app/lottie/
     - assets/app/models/
     - assets/store/screenshots/
 
