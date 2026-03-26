@@ -1,119 +1,295 @@
+import 'package:base_project_getx/app/core/utils/app_asset.dart';
+import 'package:base_project_getx/app/core/utils/app_const.dart';
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/modules/setting/widgets/w_setting_account_info.dart';
+import 'package:base_project_getx/app/modules/setting/widgets/w_setting_item.dart';
+import 'package:base_project_getx/app/modules/setting/widgets/w_setting_region.dart';
+import 'package:base_project_getx/app/modules/setting/widgets/w_setting_toggle_item.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
+import 'package:base_project_getx/app/widgets/w_frosted_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/app_asset.dart';
-import '../../../core/utils/app_const.dart';
 import '../controllers/setting_controller.dart';
-import '../widgets/w_setting_item.dart';
-import '../widgets/w_setting_region.dart';
 
 class SettingView extends GetView<SettingController> {
   const SettingView({super.key});
 
-  static final kPadding = const EdgeInsets.fromLTRB(10, 0, 10, 0).w;
+  static final _kContentPadding = EdgeInsets.symmetric(horizontal: 10.w);
 
   @override
   Widget build(BuildContext context) {
+    final topPadding = MediaQuery.of(context).padding.top;
+    final appBarHeight = topPadding + kToolbarHeight;
+
     return PAppbarTransparency(
-      body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        controller: controller.scrollController,
-        padding:
-            EdgeInsets.only(bottom: AppConstant().kBottomNavigationBarHeight.h),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              /// Page's name
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0).w,
-                child: Text(
-                  'screenNameSettings'.tr,
-                  style: Get.textTheme.tsPageName,
-                ),
-              ),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            CustomScrollView(
+              controller: controller.scrollController,
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(child: SizedBox(height: appBarHeight)),
 
-              20.verticalSpace,
-
-              /// Account info
-              Padding(
-                padding: kPadding,
-                child: WSettingAccountInfo(
-                  avatar: AppAssets().imDog,
-                  name: 'Le Hoang Han',
-                  mail: 'hoanghan.le.95@gmail.com',
-                ),
-              ),
-
-              25.verticalSpace,
-
-              /// General setting
-              Padding(
-                padding: kPadding,
-                child: WSettingRegion(
-                  label: 'General',
-                  children: [
-                    /// Languages
-                    WSettingItem(
-                      title: "labelLanguages".tr,
-                      onPressed: controller.onPressedLanguages,
-                      subTitle: "labelCurrentLanguages".tr,
-                      leading: const Icon(Icons.language),
+                // Large title + account info
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'screenNameSettings'.tr,
+                          style: Get.textTheme.tsPageName,
+                        ),
+                        SizedBox(height: 16.h),
+                        WSettingAccountInfo(
+                          avatar: AppAssets().imDog,
+                          name: 'Le Hoang Han',
+                          mail: 'hoanghan.le.95@gmail.com',
+                        ),
+                      ],
                     ),
-
-                    const Divider(height: 0),
-
-                    /// Themes
-                    Obx(() => WSettingItem(
-                      title: 'labelTheme'.tr,
-                      onPressed: controller.onChangeAppTheme,
-                      subTitle: controller.isDark.value ? "Dark" : "Light",
-                      leading: const Icon(Icons.lightbulb),
-                    )),
-                  ],
+                  ),
                 ),
-              ),
 
-              25.verticalSpace,
+                SliverPadding(
+                  padding: EdgeInsets.fromLTRB(
+                    _kContentPadding.horizontal / 2,
+                    4.h,
+                    _kContentPadding.horizontal / 2,
+                    AppConstant().kBottomNavigationBarHeight.h,
+                  ),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate([
+                      // -------------------------------------------------------
+                      // General
+                      // -------------------------------------------------------
+                      WSettingRegion(
+                        label: 'General',
+                        children: [
+                          WSettingItem(
+                            title: "labelLanguages".tr,
+                            onPressed: controller.onPressedLanguages,
+                            subTitle: "labelCurrentLanguages".tr,
+                            leading: const Icon(Icons.language_rounded),
+                          ),
+                          const Divider(height: 0),
+                          Obx(() => WSettingItem(
+                                title: 'labelTheme'.tr,
+                                onPressed: controller.onChangeAppTheme,
+                                subTitle: controller.isDark.value
+                                    ? 'Dark'
+                                    : 'Light',
+                                leading: Icon(controller.isDark.value
+                                    ? Icons.dark_mode_rounded
+                                    : Icons.light_mode_rounded),
+                              )),
+                        ],
+                      ),
 
-              /// Account setting
-              Padding(
-                padding: kPadding,
-                child: WSettingRegion(
-                  label: "labelAccount".tr,
-                  children: [
-                    /// Change password
-                    WSettingItem(
-                      title: "labelChangePassword".tr,
-                      onPressed: () {},
-                      leading: const Icon(Icons.admin_panel_settings_rounded),
-                    ),
-                  ],
+                      SizedBox(height: 24.h),
+
+                      // -------------------------------------------------------
+                      // Notifications
+                      // -------------------------------------------------------
+                      WSettingRegion(
+                        label: 'labelNotifications'.tr,
+                        children: [
+                          Obx(() => WSettingToggleItem(
+                                title: 'labelPushNotifications'.tr,
+                                leading: const Icon(
+                                    Icons.notifications_rounded),
+                                value: controller
+                                    .isPushNotificationsEnabled.value,
+                                onChanged:
+                                    controller.onTogglePushNotifications,
+                              )),
+                          const Divider(height: 0),
+                          Obx(() => WSettingToggleItem(
+                                title: 'labelSounds'.tr,
+                                leading:
+                                    const Icon(Icons.volume_up_rounded),
+                                value: controller.isSoundsEnabled.value,
+                                onChanged: controller.onToggleSounds,
+                              )),
+                          const Divider(height: 0),
+                          Obx(() => WSettingToggleItem(
+                                title: 'labelVibration'.tr,
+                                leading:
+                                    const Icon(Icons.vibration_rounded),
+                                value: controller.isVibrationEnabled.value,
+                                onChanged: controller.onToggleVibration,
+                              )),
+                        ],
+                      ),
+
+                      SizedBox(height: 24.h),
+
+                      // -------------------------------------------------------
+                      // Account
+                      // -------------------------------------------------------
+                      WSettingRegion(
+                        label: "labelAccount".tr,
+                        children: [
+                          WSettingItem(
+                            title: 'labelEditProfile'.tr,
+                            onPressed: controller.onPressedEditProfile,
+                            leading: const Icon(Icons.person_rounded),
+                          ),
+                          const Divider(height: 0),
+                          WSettingItem(
+                            title: "labelChangePassword".tr,
+                            onPressed: controller.onPressedChangePassword,
+                            leading: const Icon(
+                                Icons.lock_outline_rounded),
+                          ),
+                          const Divider(height: 0),
+                          WSettingItem(
+                            title: 'labelTwoStepVerification'.tr,
+                            onPressed:
+                                controller.onPressedTwoStepVerification,
+                            leading: const Icon(
+                                Icons.verified_user_rounded),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 24.h),
+
+                      // -------------------------------------------------------
+                      // Storage & Data
+                      // -------------------------------------------------------
+                      WSettingRegion(
+                        label: 'labelStorageData'.tr,
+                        children: [
+                          Obx(() => WSettingToggleItem(
+                                title: 'labelWifiOnlyDownload'.tr,
+                                subTitle: 'labelWifiOnlyDownloadSub'.tr,
+                                leading: const Icon(Icons.wifi_rounded),
+                                value:
+                                    controller.isWifiOnlyDownload.value,
+                                onChanged:
+                                    controller.onToggleWifiOnlyDownload,
+                              )),
+                          const Divider(height: 0),
+                          WSettingItem(
+                            title: 'labelClearCache'.tr,
+                            onPressed: controller.onPressedClearCache,
+                            leading: const Icon(
+                                Icons.cleaning_services_rounded),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 24.h),
+
+                      // -------------------------------------------------------
+                      // About
+                      // -------------------------------------------------------
+                      WSettingRegion(
+                        label: 'labelAbout'.tr,
+                        children: [
+                          WSettingItem(
+                            title: 'labelHelpSupport'.tr,
+                            onPressed: controller.onPressedHelpAndSupport,
+                            leading:
+                                const Icon(Icons.help_outline_rounded),
+                          ),
+                          const Divider(height: 0),
+                          WSettingItem(
+                            title: 'labelRateApp'.tr,
+                            onPressed: controller.onPressedRateApp,
+                            leading:
+                                const Icon(Icons.star_outline_rounded),
+                          ),
+                          const Divider(height: 0),
+                          WSettingItem(
+                            title: 'labelTermsOfService'.tr,
+                            onPressed: controller.onPressedTermsOfService,
+                            leading: const Icon(
+                                Icons.description_outlined),
+                          ),
+                          const Divider(height: 0),
+                          WSettingItem(
+                            title: 'labelPrivacyPolicy'.tr,
+                            onPressed: controller.onPressedPrivacyPolicy,
+                            leading:
+                                const Icon(Icons.privacy_tip_outlined),
+                          ),
+                          const Divider(height: 0),
+                          ListTile(
+                            leading: const Icon(Icons.info_outline_rounded),
+                            title: Text('labelAppVersion'.tr,
+                                style: Get.textTheme.tsTitle),
+                            trailing: Text(
+                              '1.0.0',
+                              style: Get.textTheme.tsSubTitle,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 24.h),
+
+                      // -------------------------------------------------------
+                      // Learning (demo)
+                      // -------------------------------------------------------
+                      WSettingRegion(
+                        label: "labelLearning".tr,
+                        children: [
+                          WSettingItem(
+                            title: "labelIsolate".tr,
+                            onPressed: controller.onPressedBtnIsolate,
+                            leading:
+                                const Icon(Icons.multiple_stop_rounded),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 24.h),
+
+                      // -------------------------------------------------------
+                      // Sign out
+                      // -------------------------------------------------------
+                      WSettingRegion(
+                        children: [
+                          ListTile(
+                            onTap: controller.onPressedSignOut,
+                            leading: Icon(
+                              Icons.logout_rounded,
+                              color: Get.theme.colorScheme.error,
+                            ),
+                            title: Text(
+                              'labelSignOut'.tr,
+                              style: Get.textTheme.tsTitle.copyWith(
+                                color: Get.theme.colorScheme.error,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 8.h),
+                    ]),
+                  ),
                 ),
-              ),
+              ],
+            ),
 
-              25.verticalSpace,
-
-              Padding(
-                padding: kPadding,
-                child: WSettingRegion(
-                  label: "labelLearning".tr,
-                  children: [
-                    /// Learning Isolate
-                    WSettingItem(
-                      title: "labelIsolate".tr,
-                      onPressed: controller.onPressedBtnIsolate,
-                      leading: const Icon(Icons.multiple_stop),
-                    ),
-                  ],
-                ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: WFrostedAppBar(
+                topPadding: topPadding,
+                scrollController: controller.scrollController,
+                title: 'screenNameSettings'.tr,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

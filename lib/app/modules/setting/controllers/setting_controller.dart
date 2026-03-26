@@ -14,9 +14,18 @@ class SettingController extends GetxController {
 
   final HomeController _homeController;
 
+  // Appearance
   var isDark = Get.isDarkMode.obs;
-  var _onTop = true;
 
+  // Notifications
+  var isPushNotificationsEnabled = true.obs;
+  var isSoundsEnabled = true.obs;
+  var isVibrationEnabled = true.obs;
+
+  // Storage
+  var isWifiOnlyDownload = false.obs;
+
+  var _onTop = true;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -31,6 +40,10 @@ class SettingController extends GetxController {
     super.onClose();
   }
 
+  // ---------------------------------------------------------------------------
+  // General
+  // ---------------------------------------------------------------------------
+
   void onPressedLanguages() {
     Get.toNamed(
       Routes.SETTING_LANGUAGES,
@@ -40,10 +53,6 @@ class SettingController extends GetxController {
     );
   }
 
-  void onPressedBtnIsolate() {
-    Get.toNamed(Routes.ISOLATE);
-  }
-
   void onChangeAppTheme() {
     isDark.value = !isDark.value;
     isDark.value
@@ -51,6 +60,102 @@ class SettingController extends GetxController {
         : Get.changeTheme(AppTheme().light);
     logger.i('Changed App Theme to \'${isDark.value ? 'dark' : 'light'}\'');
   }
+
+  // ---------------------------------------------------------------------------
+  // Notifications
+  // ---------------------------------------------------------------------------
+
+  void onTogglePushNotifications(bool value) =>
+      isPushNotificationsEnabled.value = value;
+
+  void onToggleSounds(bool value) => isSoundsEnabled.value = value;
+
+  void onToggleVibration(bool value) => isVibrationEnabled.value = value;
+
+  // ---------------------------------------------------------------------------
+  // Account
+  // ---------------------------------------------------------------------------
+
+  void onPressedEditProfile() {
+    // TODO: Navigate to edit profile screen
+  }
+
+  void onPressedChangePassword() {
+    // TODO: Navigate to change password screen
+  }
+
+  void onPressedTwoStepVerification() {
+    // TODO: Navigate to two-step verification screen
+  }
+
+  // ---------------------------------------------------------------------------
+  // Storage
+  // ---------------------------------------------------------------------------
+
+  void onPressedClearCache() {
+    Get.defaultDialog(
+      title: 'Clear Cache',
+      middleText: 'This will remove all cached data. Continue?',
+      textConfirm: 'Clear',
+      textCancel: 'Cancel',
+      onConfirm: () {
+        Get.back();
+        // TODO: implement cache clearing
+      },
+    );
+  }
+
+  void onToggleWifiOnlyDownload(bool value) =>
+      isWifiOnlyDownload.value = value;
+
+  // ---------------------------------------------------------------------------
+  // About
+  // ---------------------------------------------------------------------------
+
+  void onPressedRateApp() {
+    // TODO: Open app store rating
+  }
+
+  void onPressedTermsOfService() {
+    // TODO: Open terms of service
+  }
+
+  void onPressedPrivacyPolicy() {
+    // TODO: Open privacy policy
+  }
+
+  void onPressedHelpAndSupport() {
+    // TODO: Open help & support
+  }
+
+  // ---------------------------------------------------------------------------
+  // Learning (demo)
+  // ---------------------------------------------------------------------------
+
+  void onPressedBtnIsolate() {
+    Get.toNamed(Routes.ISOLATE);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Sign out
+  // ---------------------------------------------------------------------------
+
+  void onPressedSignOut() {
+    Get.defaultDialog(
+      title: 'labelSignOut'.tr,
+      middleText: 'labelSignOutConfirm'.tr,
+      textConfirm: 'labelSignOut'.tr,
+      textCancel: 'labelCancel'.tr,
+      confirmTextColor: Get.theme.colorScheme.onError,
+      buttonColor: Get.theme.colorScheme.error,
+      onConfirm: () {
+        Get.back();
+        // TODO: call auth service logout
+      },
+    );
+  }
+
+  // ---------------------------------------------------------------------------
 
   void _onScroll() {
     final position = scrollController.position;
