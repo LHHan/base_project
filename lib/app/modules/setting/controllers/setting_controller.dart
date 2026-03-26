@@ -137,24 +137,6 @@ class SettingController extends GetxController {
   }
 
   // ---------------------------------------------------------------------------
-  // Sign out
-  // ---------------------------------------------------------------------------
-
-  void onPressedSignOut() {
-    Get.defaultDialog(
-      title: 'labelSignOut'.tr,
-      middleText: 'labelSignOutConfirm'.tr,
-      textConfirm: 'labelSignOut'.tr,
-      textCancel: 'labelCancel'.tr,
-      confirmTextColor: Get.theme.colorScheme.onError,
-      buttonColor: Get.theme.colorScheme.error,
-      onConfirm: () {
-        Get.back();
-        // TODO: call auth service logout
-      },
-    );
-  }
-
   // ---------------------------------------------------------------------------
 
   void _onScroll() {

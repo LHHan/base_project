@@ -80,21 +80,24 @@ class WBottomNavBarDynamic extends StatelessWidget {
 
   /// Logout button widget
   Widget _buildLogout() {
-    return Row(
+    return GestureDetector(
       key: const ValueKey("logoutButton"),
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        /// Icon
-        Icon(Icons.logout, color: Colors.white, size: 28.r),
+      onTap: onLogoutPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          /// Icon
+          Icon(Icons.logout, color: Colors.white, size: 28.r),
 
-        10.horizontalSpace,
+          10.horizontalSpace,
 
-        /// Text
-        Text(
-          "btnLogout".tr,
-          style: Get.textTheme.tsButton,
-        ),
-      ],
+          /// Text
+          Text(
+            "btnLogout".tr,
+            style: Get.textTheme.tsButton,
+          ),
+        ],
+      ),
     );
   }
 

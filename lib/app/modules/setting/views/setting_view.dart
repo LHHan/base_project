@@ -60,7 +60,7 @@ class SettingView extends GetView<SettingController> {
                     _kContentPadding.horizontal / 2,
                     4.h,
                     _kContentPadding.horizontal / 2,
-                    AppConstant().kBottomNavigationBarHeight.h,
+                    AppConstant().kBottomNavigationBarHeight.h + 24.h,
                   ),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
@@ -249,30 +249,7 @@ class SettingView extends GetView<SettingController> {
                         ],
                       ),
 
-                      SizedBox(height: 24.h),
-
-                      // -------------------------------------------------------
-                      // Sign out
-                      // -------------------------------------------------------
-                      WSettingRegion(
-                        children: [
-                          ListTile(
-                            onTap: controller.onPressedSignOut,
-                            leading: Icon(
-                              Icons.logout_rounded,
-                              color: Get.theme.colorScheme.error,
-                            ),
-                            title: Text(
-                              'labelSignOut'.tr,
-                              style: Get.textTheme.tsTitle.copyWith(
-                                color: Get.theme.colorScheme.error,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 8.h),
+                      SizedBox(height: 16.h),
                     ]),
                   ),
                 ),
