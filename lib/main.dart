@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -16,6 +17,22 @@ import 'app/services/localization_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// Catch Flutter framework errors (widget build errors, rendering issues)
+  FlutterError.onError = (FlutterErrorDetails details) {
+    logger.e(
+      'Flutter error: ${details.exception}',
+      error: details.exception,
+      stackTrace: details.stack,
+    );
+    if (kDebugMode) FlutterError.presentError(details);
+  };
+
+  /// Catch uncaught Dart errors outside Flutter framework (async, isolates)
+  PlatformDispatcher.instance.onError = (error, stack) {
+    logger.e('Uncaught error: $error', error: error, stackTrace: stack);
+    return true;
+  };
 
   /// Splash screen
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

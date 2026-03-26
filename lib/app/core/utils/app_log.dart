@@ -1,14 +1,25 @@
-/* Define app logger. Log safety with production mode */
 import 'package:logger/logger.dart';
 
-/// Use logger to debug, it will not show in release mode
+/// Application logger.
+///
+/// Behavior by build mode:
+/// - **Debug**: logs everything (info, warning, error, verbose)
+/// - **Release**: logs only [Level.warning] and above — info/verbose are silenced
+///
+/// Usage:
+/// ```dart
+/// logger.i('User logged in');       // info
+/// logger.w('Token expiring soon');  // warning
+/// logger.e('API call failed', error: e, stackTrace: s); // error
+/// ```
 final Logger logger = Logger(
+  filter: ProductionFilter(),
   printer: PrettyPrinter(
-      methodCount: 2, // number of method calls to be displayed
-      errorMethodCount: 8, // number of method calls if stacktrace is provided
-      lineLength: 120, // width of the output
-      colors: true, // Colorful log messages
-      printEmojis: true, // Print an emoji for each log message
-      printTime: false // Should each log print contain a timestamp
-      ),
+    methodCount: 2,
+    errorMethodCount: 8,
+    lineLength: 120,
+    colors: true,
+    printEmojis: true,
+    dateTimeFormat: DateTimeFormat.none,
+  ),
 );

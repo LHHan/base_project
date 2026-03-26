@@ -9,9 +9,11 @@ import '../../../services/localization_service.dart';
 import '../../home/controllers/home_controller.dart';
 
 class SettingController extends GetxController {
-  final HomeController homeController = Get.find<HomeController>();
+  SettingController({required HomeController homeController})
+      : _homeController = homeController;
 
-  /// #region define variables
+  final HomeController _homeController;
+
   var isDark = Get.isDarkMode.obs;
   var _onTop = true;
 
@@ -20,23 +22,20 @@ class SettingController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-
     scrollController.addListener(_onScroll);
   }
 
   @override
   Future<void> onClose() async {
     scrollController.dispose();
-
     super.onClose();
   }
 
-  /// #region define functions
   void onPressedLanguages() {
     Get.toNamed(
       Routes.SETTING_LANGUAGES,
       arguments: {
-        Languages().localKey: LocalizationService.locale.languageCode
+        Languages().localKey: LocalizationService.locale.languageCode,
       },
     );
   }
@@ -47,25 +46,23 @@ class SettingController extends GetxController {
 
   void onChangeAppTheme() {
     isDark.value = !isDark.value;
-
     isDark.value
         ? Get.changeTheme(AppTheme().dark)
         : Get.changeTheme(AppTheme().light);
-
     logger.i('Changed App Theme to \'${isDark.value ? 'dark' : 'light'}\'');
   }
 
   void _onScroll() {
     final position = scrollController.position;
 
-    if (homeController.currentIndex.value == 3) {
+    if (_homeController.currentIndex.value == 3) {
       if (!_onTop && position.extentAfter > 0) {
         _onTop = true;
       } else if (_onTop && position.extentBefore > 0) {
         _onTop = false;
       }
 
-      homeController.updateUIBottomNavBar(
+      _homeController.updateUIBottomNavBar(
           isBottom: !_onTop && position.extentAfter < 20);
     }
   }

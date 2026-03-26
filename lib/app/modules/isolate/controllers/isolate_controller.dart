@@ -1,15 +1,21 @@
 import 'package:base_project_getx/app/core/utils/app_log.dart';
 import 'package:base_project_getx/app/data/models/product_model.dart';
+import 'package:base_project_getx/app/data/providers/product_provider.dart';
 import 'package:base_project_getx/app/data/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/user_model.dart';
-import '../../../data/providers/product_provider.dart';
 
 class IsolateController extends GetxController {
-  final _userProvider = Get.find<UserProvider>();
-  final _productProvider = Get.find<ProductProvider>();
+  IsolateController({
+    required UserProvider userProvider,
+    required ProductProvider productProvider,
+  })  : _userProvider = userProvider,
+        _productProvider = productProvider;
+
+  final UserProvider _userProvider;
+  final ProductProvider _productProvider;
 
   final _usersData = <UserModel>[];
   var filterUsersData = <UserModel>[].obs;
@@ -28,7 +34,6 @@ class IsolateController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     logger.i(
         "onInit(): Khởi tạo dữ liệu, đăng ký listener, lấy dữ liệu từ cache");
   }
@@ -36,11 +41,9 @@ class IsolateController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-
     logger.i(
         "onReady(): Gọi API lần đầu, hiển thị dialog/snackbar, thực hiện các tác vụ sau khi UI sẵn sàng");
 
-    // Gọi API get users data and products data
     Future.wait([
       fetchUsersData(),
       fetchProductsData(),
@@ -52,7 +55,6 @@ class IsolateController extends GetxController {
     pageController.dispose();
     tecSearchUsers.dispose();
     tecSearchProducts.dispose();
-
     super.onClose();
     logger.i("onClose(): Hủy listener, giải phóng tài nguyên");
   }
@@ -91,7 +93,7 @@ class IsolateController extends GetxController {
     selectedSegment.value = segment;
     pageController.animateToPage(
       segment,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
 
@@ -103,9 +105,7 @@ class IsolateController extends GetxController {
 
   Future<void> fetchUsersData() async {
     isLoading.value = true;
-
-    List<UserModel> parsedUsers = await _userProvider.getUsers();
-
+    final parsedUsers = await _userProvider.getUsers();
     _usersData.assignAll(parsedUsers);
     filterUsersData.assignAll(_usersData);
     isLoading.value = false;
@@ -113,9 +113,7 @@ class IsolateController extends GetxController {
 
   Future<void> fetchProductsData() async {
     isLoading.value = true;
-
-    List<ProductModel> parsedProducts = await _productProvider.getProducts();
-
+    final parsedProducts = await _productProvider.getProducts();
     _productsData.assignAll(parsedProducts);
     filterProductsData.assignAll(_productsData);
     isLoading.value = false;

@@ -10,6 +10,30 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../core/utils/app_config.dart';
 import '../core/utils/app_log.dart';
 
+/// Centralized HTTP client for the application.
+///
+/// Built on top of [Dio] with the following features:
+///
+/// **Token management**
+/// - Automatically attaches `Authorization: Bearer <token>` to every request.
+/// - Tokens are persisted in [GetStorage] and loaded lazily on first use.
+///
+/// **Automatic token refresh (401 flow)**
+/// ```
+/// Request → 401 Unauthorized
+///     └─ _handleRefreshToken()
+///           ├─ [concurrent] If already refreshing, wait for ongoing future
+///           └─ [first caller] POST /auth/refresh → save new tokens
+///                 ├─ success → retry original request with new token
+///                 └─ failure → clear tokens → redirect to login
+/// ```
+///
+/// **Queue-based interceptor** ([QueuedInterceptorsWrapper])
+/// Ensures that when multiple requests fail with 401 simultaneously,
+/// only one refresh call is made — others wait for it to complete.
+///
+/// **Logging**
+/// [PrettyDioLogger] is enabled only in debug mode (`kDebugMode`).
 class ApiService extends GetxService {
   late Dio _dio;
   String? _accessToken;
@@ -40,7 +64,7 @@ class ApiService extends GetxService {
       [
         QueuedInterceptorsWrapper(
           onRequest: (options, handler) {
-            // 🔥 Only load tokens when really needed
+            // Load tokens lazily — only when not yet loaded from storage
             if (!_isTokenLoaded) {
               _loadTokens();
             }
@@ -54,6 +78,8 @@ class ApiService extends GetxService {
             return handler.next(response);
           },
           onError: (DioException e, handler) async {
+            // Only attempt refresh for 401 errors that are not themselves
+            // the refresh request (prevents infinite loop via extra['refresh'])
             if (e.response?.statusCode == 401 &&
                 e.requestOptions.extra['refresh'] != true) {
               logger.e("🔴 Unauthorized error - trying refresh token...");
@@ -78,6 +104,7 @@ class ApiService extends GetxService {
             return handler.reject(handleError(e));
           },
         ),
+        // Only active in debug builds — silent in production
         PrettyDioLogger(
           request: true,
           requestHeader: true,
@@ -93,15 +120,16 @@ class ApiService extends GetxService {
     );
   }
 
-  /// 🔹 Load accessToken, refreshToken từ GetStorage
+  /// Reads [_accessToken] and [_refreshToken] from persistent storage.
   void _loadTokens() {
     _accessToken = box.read<String>('accessToken');
     _refreshToken = box.read<String>('refreshToken');
     _isTokenLoaded = true;
-    logger.i("🔄 Loaded tokens: $_accessToken, $_refreshToken");
+    if (kDebugMode) logger.i("🔄 Tokens loaded from storage.");
   }
 
-  /// 🔹 Set accessToken, refreshToken
+  /// Persists new tokens to storage and updates in-memory values.
+  /// Resets [_isTokenLoaded] so the next request re-reads from storage.
   void _saveTokens(
       {required String accessToken, required String refreshToken}) {
     _accessToken = accessToken;
@@ -112,10 +140,10 @@ class ApiService extends GetxService {
 
     _isTokenLoaded = false;
 
-    logger.i("✅ Tokens saved: $accessToken, $refreshToken");
+    if (kDebugMode) logger.i("✅ Tokens saved to storage.");
   }
 
-  /// 🔹 Clear accessToken, refreshToken
+  /// Removes tokens from memory and storage.
   void _clearTokens() {
     _accessToken = null;
     _refreshToken = null;
@@ -123,27 +151,27 @@ class ApiService extends GetxService {
     box.remove('refreshToken');
   }
 
-  /// 🟢 **GET request**
+  /// GET request
   Future<Response> get(String path, {Map<String, dynamic>? queryParams}) async {
     return await _dio.get(path, queryParameters: queryParams);
   }
 
-  /// 🟠 **POST request**
+  /// POST request
   Future<Response> post(String path, {dynamic data}) async {
     return await _dio.post(path, data: data);
   }
 
-  /// 🔵 **PUT request**
+  /// PUT request
   Future<Response> put(String path, {dynamic data}) async {
     return await _dio.put(path, data: data);
   }
 
-  /// 🔴 **DELETE request**
+  /// DELETE request
   Future<Response> delete(String path, {dynamic data}) async {
     return await _dio.delete(path, data: data);
   }
 
-  /// 🚨 **Handle errors**
+  /// Maps [DioExceptionType] to a user-friendly error message.
   DioException handleError(DioException error) {
     final messages = {
       DioExceptionType.connectionTimeout:
@@ -163,7 +191,10 @@ class ApiService extends GetxService {
             "⚠️ Something went wrong: ${error.message}");
   }
 
-  /// 🔹 Handle refresh token when 401
+  /// Handles concurrent 401 errors safely.
+  ///
+  /// If a refresh is already in progress, subsequent callers await the
+  /// same [_refreshFuture] instead of triggering duplicate refresh calls.
   Future<bool> _handleRefreshToken() async {
     if (_isRefreshing) {
       await _refreshFuture;
@@ -190,7 +221,10 @@ class ApiService extends GetxService {
     }
   }
 
-  /// 🛠 Thực hiện refresh token
+  /// Calls [POST /auth/refresh] with the current refresh token.
+  ///
+  /// Uses `extra: {'refresh': true}` to prevent the error interceptor
+  /// from triggering another refresh cycle on a 401 response.
   Future<void> _refreshTokenRequest() async {
     try {
       final response = await _dio.post(
@@ -229,7 +263,6 @@ class ApiService extends GetxService {
 
   void _logout() {
     _clearTokens();
-
     box.erase();
 
     if (kDebugMode) logger.i('🚪 Logging out... Redirecting to login screen.');

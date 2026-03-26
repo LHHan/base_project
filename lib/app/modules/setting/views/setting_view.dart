@@ -68,12 +68,12 @@ class SettingView extends GetView<SettingController> {
                     const Divider(height: 0),
 
                     /// Themes
-                    WSettingItem(
+                    Obx(() => WSettingItem(
                       title: 'labelTheme'.tr,
                       onPressed: controller.onChangeAppTheme,
                       subTitle: controller.isDark.value ? "Dark" : "Light",
                       leading: const Icon(Icons.lightbulb),
-                    ),
+                    )),
                   ],
                 ),
               ),

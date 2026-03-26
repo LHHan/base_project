@@ -7,14 +7,13 @@ import '../controllers/isolate_controller.dart';
 class IsolateBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<UserProvider>(() => UserProvider());
+    Get.lazyPut<ProductProvider>(() => ProductProvider());
     Get.lazyPut<IsolateController>(
-      () => IsolateController(),
-    );
-    Get.lazyPut<UserProvider>(
-      () => UserProvider(),
-    );
-    Get.lazyPut<ProductProvider>(
-      () => ProductProvider(),
+      () => IsolateController(
+        userProvider: Get.find(),
+        productProvider: Get.find(),
+      ),
     );
   }
 }
