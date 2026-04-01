@@ -3,7 +3,6 @@ import 'package:base_project_getx/app/widgets/w_button_inkwell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Use: final int index = await WPickerValue.showPicker(context, initialIndex: 0, initValues: <String>[]);
 
@@ -43,7 +42,7 @@ class _WPickerValueState extends State<WPickerValue> {
                 alignment: Alignment.center,
                 child: Text(e,
                     style: AppStyles().normalTextStyle(
-                      20.sp,
+                      20,
                       color: Colors.black,
                     )),
               ),
@@ -62,7 +61,7 @@ class _WPickerValueState extends State<WPickerValue> {
           child: Text(
             'Pick a value',
             style: AppStyles().normalTextStyle(
-              17.sp,
+              17,
               color: const Color(0xFF8F8F8F),
             ),
           ),
@@ -89,7 +88,7 @@ class _WPickerValueState extends State<WPickerValue> {
             child: Text(
               'Confirm',
               style: AppStyles().mediumTextStyle(
-                17.sp,
+                17,
                 color: const Color(0xFF0080FA),
               ),
             ),

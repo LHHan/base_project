@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/p_appbar_transparency.dart';
@@ -33,9 +32,9 @@ class HomeView extends GetView<HomeController> {
 
             // Floating Bottom Navigation Bar
             Positioned(
-              bottom: 16.h,
-              left: 20.w,
-              right: 20.w,
+              bottom: 16,
+              left: 20,
+              right: 20,
               child: Obx(
                 () => WBottomNavBarDynamic(
                   currentIndex: controller.currentIndex.value,

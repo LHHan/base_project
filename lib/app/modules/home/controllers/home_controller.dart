@@ -4,51 +4,27 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  /// ********
-  /// #region define service, provider
-  /// ********
-  final _apiService = ApiService.defined;
+  HomeController({required ApiService apiService}) : _apiService = apiService;
 
-  /// ********
-  /// #region define variables
-  /// ********
+  final ApiService _apiService;
+
   var currentIndex = 0.obs;
   final PageController pageController = PageController();
-
   var isScrolledToBottomInSettingPage = false.obs;
-
-  /// ********
-  /// #region implement app lifecycle
-  /// ********
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {
+    pageController.dispose();
     super.onClose();
   }
 
-  /// ********
-  /// #region define public functions
-  /// ********
-
-  /// When swiping PageView, update currentIndex
   void onPageChanged(int index) {
     currentIndex.value = index;
-
     if (index != 3 && isScrolledToBottomInSettingPage.value) {
       updateUIBottomNavBar(isBottom: false);
     }
   }
 
-  /// When clicking on BottomNavigation, switch to the corresponding page
   void onTabSelected(int index) {
     if (index != currentIndex.value) {
       pageController.animateToPage(
@@ -67,8 +43,4 @@ class HomeController extends GetxController
   void updateUIBottomNavBar({bool isBottom = false}) {
     isScrolledToBottomInSettingPage.value = isBottom;
   }
-
-  /// ********
-  /// #region define private functions
-  /// ********
 }

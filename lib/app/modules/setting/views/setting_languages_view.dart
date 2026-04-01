@@ -1,6 +1,6 @@
+import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/widgets/w_button_rounded.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -20,10 +20,10 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
         children: [
           /// Page's name
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0).w,
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
             child: Text(
               'labelLanguages'.tr,
-              style: AppStyles().mediumTextStyle(36.sp),
+              style: AppStyles().mediumTextStyle(36),
             ),
           ),
 
@@ -35,17 +35,17 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
               alignment: Alignment.topCenter,
               children: [
                 Positioned(
-                  top: 70.h,
+                  top: 70,
                   bottom: 0,
                   width: Get.width,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(32.r),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(32),
                       ),
                       color: const ColorScheme.light().primary,
                     ),
-                    padding: const EdgeInsets.fromLTRB(0, 80, 0, 30).h,
+                    padding: const EdgeInsets.fromLTRB(0, 80, 0, 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -58,12 +58,12 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
-                              mainAxisSpacing: 4.h,
-                              crossAxisSpacing: 4.w,
-                              mainAxisExtent: 140.h,
+                              mainAxisSpacing: 4,
+                              crossAxisSpacing: 4,
+                              mainAxisExtent: 140,
                             ),
                             padding:
-                                const EdgeInsets.fromLTRB(16, 0, 16, 100).w,
+                                const EdgeInsets.fromLTRB(16, 0, 16, 100),
                             itemCount: controller.dummyLanguages.length,
                             itemBuilder: (context, index) => GetBuilder(
                               id: 'idLanguagesItem_$index',
@@ -92,13 +92,13 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
                 /// Current languages
                 Positioned(
                   child: CircleAvatar(
-                    maxRadius: 70.r,
+                    maxRadius: 70,
                     backgroundColor: Colors.black12.withValues(alpha: 0.1),
                     child: CircleAvatar(
-                      maxRadius: 55.r,
+                      maxRadius: 55,
                       backgroundColor: Colors.black12.withValues(alpha: 0.1),
                       child: CircleAvatar(
-                        maxRadius: 45.r,
+                        maxRadius: 45,
                         backgroundColor: Colors.white54,
                         child: ClipOval(
                           child: Obx(
@@ -120,14 +120,14 @@ class SettingLanguagesView extends GetView<SettingLanguagesController> {
                 Positioned(
                   bottom: 50,
                   child: SizedBox(
-                    width: 200.w,
-                    height: 45.h,
+                    width: 200,
+                    height: 45,
                     child: WButtonRounded(
                       background: const ColorScheme.light().surface,
                       onPressed: controller.onPressedOKButton,
                       child: Text(
                         'OK',
-                        style: AppStyles().semiBoldTextStyle(20.sp,
+                        style: AppStyles().semiBoldTextStyle(20,
                             color: const ColorScheme.light().primary),
                       ),
                     ),

@@ -2,7 +2,6 @@ import 'package:base_project_getx/app/core/utils/app_style.dart';
 import 'package:base_project_getx/app/widgets/w_button_inkwell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Use: final DateTime dateTime = await WPickerDate.showPicker(context);
 
@@ -39,7 +38,7 @@ class _WPickerDateState extends State<WPickerDate> {
           child: Text(
             'Pick a time',
             style: AppStyles()
-                .normalTextStyle(17.sp, color: const Color(0xFF8F8F8F)),
+                .normalTextStyle(17, color: const Color(0xFF8F8F8F)),
           ),
         ),
         SizedBox(
@@ -62,7 +61,7 @@ class _WPickerDateState extends State<WPickerDate> {
             child: Text(
               'Confirm',
               style: AppStyles()
-                  .normalTextStyle(17.sp, color: const Color(0xFF0080FA)),
+                  .normalTextStyle(17, color: const Color(0xFF0080FA)),
             ),
           ),
           onPressed: () {

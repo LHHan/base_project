@@ -16,6 +16,7 @@ abstract class Routes {
   static const FEED = _Paths.FEED;
   static const ONBOARDING = _Paths.ONBOARDING;
   static const CHAT = _Paths.CHAT;
+  static const CHAT_DETAIL = _Paths.CHAT_DETAIL;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const FEED = '/feed';
   static const ONBOARDING = '/onboarding';
   static const CHAT = '/chat';
+  static const CHAT_DETAIL = '/chat/detail';
 }

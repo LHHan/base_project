@@ -3,11 +3,14 @@ import 'dart:math';
 
 import 'package:base_project_getx/app/core/utils/app_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-/// Extension for screen util
-extension SizeExtension on num {}
+/// Fixed logical pixels for [horizontalSpace] / [verticalSpace] helpers.
+extension SpacingSizedBox on num {
+  SizedBox get horizontalSpace => SizedBox(width: toDouble());
+
+  SizedBox get verticalSpace => SizedBox(height: toDouble());
+}
 
 /// Extension for DateTime
 extension DateTimeExtension on DateTime {
@@ -284,27 +287,27 @@ extension ListExtensions<E> on List<E> {
 /// Extension for TextTheme
 extension TextThemeExtensions on TextTheme {
   // TextStyle for page name
-  TextStyle get tsPageName => AppStyles().blackTextStyle(40.sp);
+  TextStyle get tsPageName => AppStyles().blackTextStyle(40);
 
   // TextStyle for label
-  TextStyle get tsLabel => AppStyles().normalTextStyle(28.sp);
+  TextStyle get tsLabel => AppStyles().normalTextStyle(28);
 
   // TextStyle for title
-  TextStyle get tsTitle => AppStyles().normalTextStyle(20.sp);
+  TextStyle get tsTitle => AppStyles().normalTextStyle(20);
 
   // TextStyle for subTitle
-  TextStyle get tsSubTitle => AppStyles().lightTextStyle(18.sp);
+  TextStyle get tsSubTitle => AppStyles().lightTextStyle(18);
 
   // TextStyle for body, message
-  TextStyle get tsBody => AppStyles().normalTextStyle(16.sp);
+  TextStyle get tsBody => AppStyles().normalTextStyle(16);
 
   // TextStyle for hint
-  TextStyle get tsHint => AppStyles().normalTextStyle(16.sp);
+  TextStyle get tsHint => AppStyles().normalTextStyle(16);
 
   // TextStyle for chip
-  TextStyle get tsChip => AppStyles().normalTextStyle(14.sp);
+  TextStyle get tsChip => AppStyles().normalTextStyle(14);
 
   // TextStyle for button
   TextStyle get tsButton =>
-      AppStyles().boldTextStyle(20.sp, color: Colors.white);
+      AppStyles().boldTextStyle(20, color: Colors.white);
 }

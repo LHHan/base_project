@@ -59,33 +59,41 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      maidenName: json['maidenName'],
-      age: json['age'],
-      gender: json['gender'],
-      email: json['email'],
-      phone: json['phone'],
-      username: json['username'],
-      password: json['password'],
-      birthDate: json['birthDate'],
-      image: json['image'],
-      bloodGroup: json['bloodGroup'],
-      height: json['height'].toDouble(),
-      weight: json['weight'].toDouble(),
-      eyeColor: json['eyeColor'],
-      hair: HairModel.fromJson(json['hair']),
-      address: AddressModel.fromJson(json['address']),
-      domain: json['domain'] ?? '',
-      ip: json['ip'],
-      macAddress: json['macAddress'],
-      university: json['university'],
-      bank: BankModel.fromJson(json['bank']),
-      company: CompanyModel.fromJson(json['company']),
-      ein: json['ein'],
-      ssn: json['ssn'],
-      userAgent: json['userAgent'],
+      id: json['id'] as int? ?? 0,
+      firstName: json['firstName'] as String? ?? '',
+      lastName: json['lastName'] as String? ?? '',
+      maidenName: json['maidenName'] as String? ?? '',
+      age: json['age'] as int? ?? 0,
+      gender: json['gender'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      username: json['username'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+      birthDate: json['birthDate'] as String? ?? '',
+      image: json['image'] as String? ?? '',
+      bloodGroup: json['bloodGroup'] as String? ?? '',
+      height: (json['height'] as num?)?.toDouble() ?? 0.0,
+      weight: (json['weight'] as num?)?.toDouble() ?? 0.0,
+      eyeColor: json['eyeColor'] as String? ?? '',
+      hair: json['hair'] != null
+          ? HairModel.fromJson(json['hair'] as Map<String, dynamic>)
+          : HairModel(color: '', type: ''),
+      address: json['address'] != null
+          ? AddressModel.fromJson(json['address'] as Map<String, dynamic>)
+          : AddressModel.empty(),
+      domain: json['domain'] as String? ?? '',
+      ip: json['ip'] as String? ?? '',
+      macAddress: json['macAddress'] as String? ?? '',
+      university: json['university'] as String? ?? '',
+      bank: json['bank'] != null
+          ? BankModel.fromJson(json['bank'] as Map<String, dynamic>)
+          : BankModel(cardNumber: '', cardType: '', currency: '', iban: ''),
+      company: json['company'] != null
+          ? CompanyModel.fromJson(json['company'] as Map<String, dynamic>)
+          : CompanyModel(name: '', address: AddressModel.empty()),
+      ein: json['ein'] as String? ?? '',
+      ssn: json['ssn'] as String? ?? '',
+      userAgent: json['userAgent'] as String? ?? '',
     );
   }
 
@@ -130,17 +138,12 @@ class HairModel {
 
   factory HairModel.fromJson(Map<String, dynamic> json) {
     return HairModel(
-      color: json['color'],
-      type: json['type'],
+      color: json['color'] as String? ?? '',
+      type: json['type'] as String? ?? '',
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'color': color,
-      'type': type,
-    };
-  }
+  Map<String, dynamic> toJson() => {'color': color, 'type': type};
 }
 
 class AddressModel {
@@ -148,24 +151,34 @@ class AddressModel {
   final String city;
   final CoordinatesModel coordinates;
 
-  AddressModel(
-      {required this.address, required this.city, required this.coordinates});
+  AddressModel({
+    required this.address,
+    required this.city,
+    required this.coordinates,
+  });
+
+  factory AddressModel.empty() => AddressModel(
+        address: '',
+        city: '',
+        coordinates: CoordinatesModel(lat: 0.0, lng: 0.0),
+      );
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
     return AddressModel(
-      address: json['address'],
-      city: json['city'],
-      coordinates: CoordinatesModel.fromJson(json['coordinates']),
+      address: json['address'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      coordinates: json['coordinates'] != null
+          ? CoordinatesModel.fromJson(
+              json['coordinates'] as Map<String, dynamic>)
+          : CoordinatesModel(lat: 0.0, lng: 0.0),
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'address': address,
-      'city': city,
-      'coordinates': coordinates.toJson(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'address': address,
+        'city': city,
+        'coordinates': coordinates.toJson(),
+      };
 }
 
 class CoordinatesModel {
@@ -176,17 +189,12 @@ class CoordinatesModel {
 
   factory CoordinatesModel.fromJson(Map<String, dynamic> json) {
     return CoordinatesModel(
-      lat: json['lat'].toDouble(),
-      lng: json['lng'].toDouble(),
+      lat: (json['lat'] as num?)?.toDouble() ?? 0.0,
+      lng: (json['lng'] as num?)?.toDouble() ?? 0.0,
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'lat': lat,
-      'lng': lng,
-    };
-  }
+  Map<String, dynamic> toJson() => {'lat': lat, 'lng': lng};
 }
 
 class BankModel {
@@ -195,29 +203,28 @@ class BankModel {
   final String currency;
   final String iban;
 
-  BankModel(
-      {required this.cardNumber,
-      required this.cardType,
-      required this.currency,
-      required this.iban});
+  BankModel({
+    required this.cardNumber,
+    required this.cardType,
+    required this.currency,
+    required this.iban,
+  });
 
   factory BankModel.fromJson(Map<String, dynamic> json) {
     return BankModel(
-      cardNumber: json['cardNumber'],
-      cardType: json['cardType'],
-      currency: json['currency'],
-      iban: json['iban'],
+      cardNumber: json['cardNumber'] as String? ?? '',
+      cardType: json['cardType'] as String? ?? '',
+      currency: json['currency'] as String? ?? '',
+      iban: json['iban'] as String? ?? '',
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'cardNumber': cardNumber,
-      'cardType': cardType,
-      'currency': currency,
-      'iban': iban,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'cardNumber': cardNumber,
+        'cardType': cardType,
+        'currency': currency,
+        'iban': iban,
+      };
 }
 
 class CompanyModel {
@@ -228,15 +235,15 @@ class CompanyModel {
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) {
     return CompanyModel(
-      name: json['name'],
-      address: AddressModel.fromJson(json['address']),
+      name: json['name'] as String? ?? '',
+      address: json['address'] != null
+          ? AddressModel.fromJson(json['address'] as Map<String, dynamic>)
+          : AddressModel.empty(),
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'address': address.toJson(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'address': address.toJson(),
+      };
 }

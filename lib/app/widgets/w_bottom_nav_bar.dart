@@ -2,7 +2,6 @@ import 'package:base_project_getx/app/core/utils/app_asset.dart';
 import 'package:base_project_getx/app/core/utils/app_const.dart';
 import 'package:base_project_getx/app/widgets/w_dashed_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -18,13 +17,13 @@ class WBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20).r,
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15).r,
+        margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
         constraints: BoxConstraints(
-            maxHeight: AppConstant().kBottomNavigationBarHeight.h),
+            maxHeight: AppConstant().kBottomNavigationBarHeight.toDouble()),
         decoration: BoxDecoration(
           color: Color(0xFF1A1A2E),
-          borderRadius: BorderRadius.circular(50.r),
+          borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
               color: Colors.purple.withValues(alpha: 0.4),
@@ -58,9 +57,9 @@ class WBottomNavBar extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        padding: EdgeInsets.all(2.r),
+        padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(16),
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -74,23 +73,23 @@ class WBottomNavBar extends StatelessWidget {
         ),
         child: WDashedBox(
           color: isSelected ? Color(0xFFA020F0) : Color(0xFFB0BEC5),
-          dashWidth: 6.r,
-          dashSpace: 4.r,
-          strokeWidth: 2.r,
-          borderRadius: 14.r,
+          dashWidth: 6,
+          dashSpace: 4,
+          strokeWidth: 2,
+          borderRadius: 14,
           child: AnimatedScale(
             scale: isSelected ? 1.25 : 1.0,
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeInOut,
             child: CircleAvatar(
-              radius: isSelected ? 16.r : 14.r,
+              radius: isSelected ? 16 : 14,
               backgroundImage: isAvatar ? AssetImage(AppAssets().imDog) : null,
               backgroundColor: Colors.transparent,
               child: isAvatar
                   ? null
                   : Icon(
                       icon,
-                      size: 28.r,
+                      size: 28,
                       color: Color(0xFFC0C0C0),
                     ),
             ),

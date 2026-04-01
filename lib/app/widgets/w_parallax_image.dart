@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ParallaxImageCard extends StatelessWidget {
   const ParallaxImageCard(
@@ -29,7 +28,7 @@ class ParallaxImageCard extends StatelessWidget {
       );
 
   BoxDecoration get _vignetteDecoration => BoxDecoration(
-        borderRadius: BorderRadius.circular(12).r,
+        borderRadius: BorderRadius.circular(12),
         gradient: const RadialGradient(
           radius: 2,
           colors: [Colors.transparent, Colors.black],

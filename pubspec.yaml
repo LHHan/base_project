@@ -12,13 +12,15 @@ dependencies:
   get: ^4.7.2
   logger: ^2.5.0
   get_storage: ^2.0.3
-  flutter_screenutil: ^5.9.3
+  flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.4
   flutter_native_splash: ^2.4.4
   dio: ^5.8.0+1
   pretty_dio_logger: ^1.4.0
   google_fonts: ^6.2.1
   intl: ^0.20.2
+  lottie: ^3.3.1
+
   flutter:
     sdk: flutter
 
@@ -37,6 +39,7 @@ flutter:
     - assets/app/fonts/
     - assets/app/icons/
     - assets/app/images/
+    - assets/app/lottie/
     - assets/app/models/
     - assets/store/screenshots/
 
