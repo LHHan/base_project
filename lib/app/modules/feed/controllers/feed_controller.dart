@@ -1,4 +1,4 @@
-import 'package:base_project_getx/app/data/models/product_model.dart';
+import 'package:base_project_getx/app/data/models/feed_model.dart';
 import 'package:base_project_getx/app/data/providers/feed_provider.dart';
 import 'package:base_project_getx/app/services/rest_api_safety.dart';
 import 'package:get/get.dart';
@@ -9,28 +9,28 @@ class FeedController extends GetxController with RestApiSafety {
 
   final FeedProvider _feedProvider;
 
-  var products = <ProductModel>[].obs;
+  var posts = <FeedModel>[].obs;
   var isLoading = false.obs;
 
   @override
   void onReady() {
     super.onReady();
-    fetchProducts();
+    fetchPosts();
   }
 
-  Future<void> fetchProducts() async {
+  Future<void> fetchPosts() async {
     await apiCallSafety(
-      () => _feedProvider.getFeedProducts(),
+      () => _feedProvider.getPosts(),
       onStart: () async => isLoading.value = true,
       onCompleted: (status, res) async {
-        if (status && res != null) products.assignAll(res);
+        if (status && res != null) posts.assignAll(res);
         isLoading.value = false;
       },
     );
   }
 
   Future<void> onRefresh() async {
-    products.clear();
-    await fetchProducts();
+    posts.clear();
+    await fetchPosts();
   }
 }

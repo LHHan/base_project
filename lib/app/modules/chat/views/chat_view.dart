@@ -1,10 +1,11 @@
+import 'package:base_project_getx/app/core/utils/app_const.dart';
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
+import 'package:base_project_getx/app/data/models/user_model.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/app_const.dart';
 import '../controllers/chat_controller.dart';
 
 class ChatView extends GetView<ChatController> {
@@ -20,10 +21,7 @@ class ChatView extends GetView<ChatController> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12).w,
-                child: Text(
-                  'Chats',
-                  style: Get.textTheme.tsPageName,
-                ),
+                child: Text('Chats', style: Get.textTheme.tsPageName),
               ),
               Expanded(
                 child: Obx(() {
@@ -35,34 +33,24 @@ class ChatView extends GetView<ChatController> {
                   }
                   return ListView.separated(
                     padding: EdgeInsets.only(
-                      bottom: AppConstant().kBottomNavigationBarHeight.toDouble().h,
+                      bottom:
+                          AppConstant().kBottomNavigationBarHeight.toDouble().h,
                     ),
                     itemCount: controller.contacts.length,
-                    separatorBuilder: (_, __) =>
-                        const Divider(height: 0, indent: 72),
+                    separatorBuilder: (_, __) => Divider(
+                      height: 0,
+                      indent: 76.w,
+                    ),
                     itemBuilder: (context, index) {
                       final user = controller.contacts[index];
-                      return ListTile(
+                      return _ContactTile(
+                        user: user,
+                        lastMessage: controller.lastMessage(user.id),
+                        lastTime: controller.lastTime(user.id),
+                        hasUnread: controller.hasUnread(user.id),
+                        unreadCount: controller.unreadCount(user.id),
+                        isOnline: controller.isOnline(user.id),
                         onTap: () => controller.onTapContact(user),
-                        leading: CircleAvatar(
-                          radius: 24.r,
-                          backgroundImage: NetworkImage(user.image),
-                          onBackgroundImageError: (_, __) {},
-                        ),
-                        title: Text(
-                          '${user.firstName} ${user.lastName}',
-                          style: Get.textTheme.tsBody,
-                        ),
-                        subtitle: Text(
-                          user.email,
-                          style: Get.textTheme.tsSubTitle,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        trailing: Text(
-                          '12:00',
-                          style: Get.textTheme.tsChip,
-                        ),
                       );
                     },
                   );
@@ -70,6 +58,138 @@ class ChatView extends GetView<ChatController> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// -----------------------------------------------------------------------------
+
+class _ContactTile extends StatelessWidget {
+  const _ContactTile({
+    required this.user,
+    required this.lastMessage,
+    required this.lastTime,
+    required this.hasUnread,
+    required this.unreadCount,
+    required this.isOnline,
+    required this.onTap,
+  });
+
+  final UserModel user;
+  final String lastMessage;
+  final String lastTime;
+  final bool hasUnread;
+  final int unreadCount;
+  final bool isOnline;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+        child: Row(
+          children: [
+            // Avatar with online indicator
+            Stack(
+              children: [
+                CircleAvatar(
+                  radius: 26.r,
+                  backgroundImage: NetworkImage(user.image),
+                  onBackgroundImageError: (_, __) {},
+                ),
+                if (isOnline)
+                  Positioned(
+                    right: 1,
+                    bottom: 1,
+                    child: Container(
+                      width: 11.r,
+                      height: 11.r,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF4CAF50),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Get.theme.scaffoldBackgroundColor,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+
+            12.horizontalSpace,
+
+            // Name + last message
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${user.firstName} ${user.lastName}',
+                    style: Get.textTheme.tsBody.copyWith(
+                      fontWeight:
+                          hasUnread ? FontWeight.w700 : FontWeight.w500,
+                    ),
+                  ),
+                  4.verticalSpace,
+                  Text(
+                    lastMessage,
+                    style: Get.textTheme.tsSubTitle.copyWith(
+                      fontWeight:
+                          hasUnread ? FontWeight.w600 : FontWeight.normal,
+                      color: hasUnread
+                          ? Get.theme.colorScheme.onSurface
+                          : Get.theme.colorScheme.onSurfaceVariant,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+
+            10.horizontalSpace,
+
+            // Time + unread badge
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  lastTime,
+                  style: Get.textTheme.tsChip.copyWith(
+                    color: hasUnread
+                        ? Get.theme.colorScheme.primary
+                        : Get.theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                6.verticalSpace,
+                if (hasUnread)
+                  Container(
+                    width: 20.r,
+                    height: 20.r,
+                    decoration: BoxDecoration(
+                      color: Get.theme.colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '$unreadCount',
+                      style: TextStyle(
+                        color: Get.theme.colorScheme.onPrimary,
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  )
+                else
+                  SizedBox(height: 20.r),
+              ],
+            ),
+          ],
         ),
       ),
     );
