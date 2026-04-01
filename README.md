@@ -78,7 +78,6 @@ test_driver/                       ---> place integration testing
 - get_storage 👉 https://pub.dev/packages/get_storage
 - dio: (^5.8.0+1) 👉 https://pub.dev/packages/dio
 - pretty_dio_logger: (^1.4.0) 👉 https://pub.dev/packages/pretty_dio_logger
-- flutter_screenutil (5.9.3) 👉 https://pub.dev/packages/flutter_screenutil
 - flutter_native_splash 👉 https://pub.dev/packages/flutter_native_splash
 - flutter_svg 👉 https://pub.dev/packages/flutter_svg
 - logger 👉 https://pub.dev/packages/logger

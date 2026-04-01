@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 /// iOS-style frosted glass navigation bar.
@@ -86,7 +85,7 @@ class WFrostedAppBar extends StatelessWidget {
                   child: SizedBox(
                     height: kToolbarHeight,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
@@ -96,7 +95,7 @@ class WFrostedAppBar extends StatelessWidget {
                             child: Text(
                               title,
                               style: Get.textTheme.tsPageName.copyWith(
-                                fontSize: 20.sp,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

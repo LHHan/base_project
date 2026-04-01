@@ -3,7 +3,6 @@ import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/data/models/user_model.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../controllers/chat_controller.dart';
@@ -20,7 +19,7 @@ class ChatView extends GetView<ChatController> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 12).w,
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
                 child: Text('Chats', style: Get.textTheme.tsPageName),
               ),
               Expanded(
@@ -34,12 +33,12 @@ class ChatView extends GetView<ChatController> {
                   return ListView.separated(
                     padding: EdgeInsets.only(
                       bottom:
-                          AppConstant().kBottomNavigationBarHeight.toDouble().h,
+                          AppConstant().kBottomNavigationBarHeight.toDouble(),
                     ),
                     itemCount: controller.contacts.length,
                     separatorBuilder: (_, __) => Divider(
                       height: 0,
-                      indent: 76.w,
+                      indent: 76,
                     ),
                     itemBuilder: (context, index) {
                       final user = controller.contacts[index];
@@ -90,14 +89,14 @@ class _ContactTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Row(
           children: [
             // Avatar with online indicator
             Stack(
               children: [
                 CircleAvatar(
-                  radius: 26.r,
+                  radius: 26,
                   backgroundImage: NetworkImage(user.image),
                   onBackgroundImageError: (_, __) {},
                 ),
@@ -106,8 +105,8 @@ class _ContactTile extends StatelessWidget {
                     right: 1,
                     bottom: 1,
                     child: Container(
-                      width: 11.r,
-                      height: 11.r,
+                      width: 11,
+                      height: 11,
                       decoration: BoxDecoration(
                         color: const Color(0xFF4CAF50),
                         shape: BoxShape.circle,
@@ -169,8 +168,8 @@ class _ContactTile extends StatelessWidget {
                 6.verticalSpace,
                 if (hasUnread)
                   Container(
-                    width: 20.r,
-                    height: 20.r,
+                    width: 20,
+                    height: 20,
                     decoration: BoxDecoration(
                       color: Get.theme.colorScheme.primary,
                       shape: BoxShape.circle,
@@ -180,13 +179,13 @@ class _ContactTile extends StatelessWidget {
                       '$unreadCount',
                       style: TextStyle(
                         color: Get.theme.colorScheme.onPrimary,
-                        fontSize: 11.sp,
+                        fontSize: 11,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   )
                 else
-                  SizedBox(height: 20.r),
+                  const SizedBox(height: 20),
               ],
             ),
           ],

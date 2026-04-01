@@ -1,6 +1,5 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../controllers/onboarding_controller.dart';
@@ -47,14 +46,14 @@ class OnboardingView extends GetView<OnboardingController> {
                     controller.pages.length,
                     (index) => AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
-                      margin: const EdgeInsets.symmetric(horizontal: 4).w,
-                      width: controller.currentPage.value == index ? 24.w : 8.w,
-                      height: 8.h,
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      width: controller.currentPage.value == index ? 24 : 8,
+                      height: 8,
                       decoration: BoxDecoration(
                         color: controller.currentPage.value == index
                             ? controller.pages[index].color
                             : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(4.r),
+                        borderRadius: BorderRadius.circular(4),
                       ),
                     ),
                   ),
@@ -64,16 +63,16 @@ class OnboardingView extends GetView<OnboardingController> {
 
             // Next / Get Started button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24).w,
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Obx(() => SizedBox(
                     width: double.infinity,
-                    height: 52.h,
+                    height: 52,
                     child: ElevatedButton(
                       onPressed: controller.nextPage,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: controller.pages[controller.currentPage.value].color,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.r),
+                          borderRadius: BorderRadius.circular(16),
                         ),
                       ),
                       child: Text(
@@ -100,20 +99,20 @@ class _OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32).w,
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 160.r,
-            height: 160.r,
+            width: 160,
+            height: 160,
             decoration: BoxDecoration(
               color: page.color.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
             child: Icon(
               page.icon,
-              size: 80.r,
+              size: 80,
               color: page.color,
             ),
           ),

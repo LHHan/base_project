@@ -1,6 +1,5 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class WSettingAccountInfo extends StatelessWidget {
@@ -20,25 +19,25 @@ class WSettingAccountInfo extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Get.theme.colorScheme.secondary,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(16),
       ),
-      constraints: BoxConstraints(
-        minHeight: 150.h,
+      constraints: const BoxConstraints(
+        minHeight: 150,
       ),
-      padding: EdgeInsets.fromLTRB(16.w, 4.h, 16.w, 4.h),
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
       child: Row(
         children: [
           /// Avatar
           CircleAvatar(
-            maxRadius: 70.r,
+            maxRadius: 70,
             backgroundColor:
                 Get.theme.colorScheme.primary.withValues(alpha: 0.4),
             child: CircleAvatar(
-              maxRadius: 55.r,
+              maxRadius: 55,
               backgroundColor:
                   Get.theme.colorScheme.primary.withValues(alpha: 0.5),
               child: CircleAvatar(
-                maxRadius: 45.r,
+                maxRadius: 45,
                 backgroundColor: Colors.white54,
                 child: ClipOval(
                   child: Image.asset(
@@ -63,7 +62,7 @@ class WSettingAccountInfo extends StatelessWidget {
                 Text(
                   name,
                   style: Get.textTheme.tsBody.copyWith(
-                    fontSize: 26.sp,
+                    fontSize: 26,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

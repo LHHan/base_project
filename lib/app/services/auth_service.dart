@@ -1,59 +1,44 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../data/models/token_model.dart';
 import '../routes/app_pages.dart';
+import 'token_storage_service.dart';
 
 class AuthService extends GetxService {
-  /// Storage
-  static GetStorage box = GetStorage();
-
   static AuthService get get => Get.find<AuthService>();
 
+  Token? _token;
+
+  Token? get token => _token;
+
   Future<AuthService> init() async {
+    _token = await Get.find<TokenStorageService>().readToken();
     return this;
   }
 
-  /// Token
-  Token? _token;
-
-  get token => _token;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    /// Get Token from get storage
-    if (box.hasData(Token.localKey)) {
-      _token = Token.fromJson(box.read(Token.localKey));
-    }
-
-    /// listen for token value
-    /// If token value is null then automatically redirect to INIT page
-    box.listenKey(Token.localKey, (newToken) {
-      if (newToken == null) {
-        handleLogout();
-      }
-      _token = newToken;
-    });
-  }
-
-  bool logged() => _token != null;
+  bool logged() =>
+      _token != null &&
+      _token!.accessToken.isNotEmpty;
 
   void clear() {
     _token = Token.empty();
   }
 
+  /// Clears in-memory token after secure storage was wiped (e.g. API logout).
+  void clearToken() {
+    _token = null;
+  }
+
+  Future<void> syncTokenFromStorage() async {
+    _token = await Get.find<TokenStorageService>().readToken();
+  }
+
   Future<void> handleLogout() async {
-    // Call api logout here
+    // Call api logout here if needed.
 
-    // Clear GetStorage
-    box.erase();
-
-    // Clear token
+    await Get.find<TokenStorageService>().clearAuth();
     _token = null;
 
-    // Navigate to ONBOARDING screen
     Get.offAllNamed(Routes.ONBOARDING);
   }
 }

@@ -2,7 +2,6 @@ import 'package:base_project_getx/app/core/utils/app_style.dart';
 import 'package:base_project_getx/app/data/models/languages_model.dart';
 import 'package:base_project_getx/app/widgets/w_button_inkwell.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WLanguagesItem extends StatelessWidget {
@@ -24,9 +23,9 @@ class WLanguagesItem extends StatelessWidget {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(10),
         side: isSelected
-            ? BorderSide(width: 3.r, color: Colors.lightGreen)
+            ? const BorderSide(width: 3, color: Colors.lightGreen)
             : BorderSide.none,
       ),
       child: WButtonInkwell(
@@ -51,7 +50,7 @@ class WLanguagesItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   language.langName ?? '',
-                  style: AppStyles().mediumTextStyle(16.sp),
+                  style: AppStyles().mediumTextStyle(16),
                 ),
               ),
             ),

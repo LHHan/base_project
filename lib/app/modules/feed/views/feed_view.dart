@@ -3,7 +3,6 @@ import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/data/models/feed_model.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../controllers/feed_controller.dart';
@@ -20,7 +19,7 @@ class FeedView extends GetView<FeedController> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8).w,
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: Text('Feed', style: Get.textTheme.tsPageName),
               ),
               Expanded(
@@ -35,13 +34,13 @@ class FeedView extends GetView<FeedController> {
                     onRefresh: controller.onRefresh,
                     child: ListView.separated(
                       padding: EdgeInsets.fromLTRB(
-                        12.w,
-                        4.h,
-                        12.w,
-                        AppConstant().kBottomNavigationBarHeight.toDouble().h,
+                        12,
+                        4,
+                        12,
+                        AppConstant().kBottomNavigationBarHeight.toDouble(),
                       ),
                       itemCount: controller.posts.length,
-                      separatorBuilder: (_, __) => SizedBox(height: 12.h),
+                      separatorBuilder: (_, __) => const SizedBox(height: 12),
                       itemBuilder: (context, index) =>
                           _PostCard(post: controller.posts[index]),
                     ),
@@ -86,13 +85,13 @@ class _PostCard extends StatelessWidget {
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(16),
         side: BorderSide(
           color: Get.theme.colorScheme.outlineVariant.withValues(alpha: 0.5),
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -100,13 +99,13 @@ class _PostCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  radius: 18.r,
+                  radius: 18,
                   backgroundColor: _avatarColor,
                   child: Text(
                     'U${post.userId}',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 11.sp,
+                      fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -135,18 +134,18 @@ class _PostCard extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 12.h),
+            const SizedBox(height: 12),
 
             // ---- Title ----
             Text(
               post.title,
               style: Get.textTheme.tsBody.copyWith(
                 fontWeight: FontWeight.w700,
-                fontSize: 17.sp,
+                fontSize: 17,
               ),
             ),
 
-            SizedBox(height: 6.h),
+            const SizedBox(height: 6),
 
             // ---- Body ----
             Text(
@@ -158,9 +157,9 @@ class _PostCard extends StatelessWidget {
 
             // ---- Extra tags ----
             if (post.tags.length > 1) ...[
-              SizedBox(height: 10.h),
+              const SizedBox(height: 10),
               Wrap(
-                spacing: 6.w,
+                spacing: 6,
                 children: post.tags
                     .skip(1)
                     .map((t) => _TagChip(label: t))
@@ -168,14 +167,14 @@ class _PostCard extends StatelessWidget {
               ),
             ],
 
-            SizedBox(height: 14.h),
+            const SizedBox(height: 14),
 
             // ---- Footer: reactions ----
             Divider(
               height: 1,
               color: Get.theme.colorScheme.outlineVariant.withValues(alpha: 0.4),
             ),
-            SizedBox(height: 10.h),
+            const SizedBox(height: 10),
             Row(
               children: [
                 _ReactionItem(
@@ -212,10 +211,10 @@ class _TagChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
         color: Get.theme.colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         '#$label',
@@ -244,7 +243,7 @@ class _ReactionItem extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 16.r, color: color),
+        Icon(icon, size: 16, color: color),
         5.horizontalSpace,
         Text(label, style: Get.textTheme.tsChip),
       ],

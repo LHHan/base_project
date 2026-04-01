@@ -1,7 +1,6 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/app_const.dart';
@@ -19,7 +18,7 @@ class NotificationsView extends GetView<NotificationsController> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0).w,
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -52,7 +51,7 @@ class NotificationsView extends GetView<NotificationsController> {
                   }
                   return ListView.separated(
                     padding: EdgeInsets.only(
-                      bottom: AppConstant().kBottomNavigationBarHeight.toDouble().h,
+                      bottom: AppConstant().kBottomNavigationBarHeight.toDouble(),
                     ),
                     itemCount: controller.notifications.length,
                     separatorBuilder: (_, __) => const Divider(height: 0),
@@ -95,19 +94,19 @@ class _NotificationTile extends StatelessWidget {
         color: item.isRead
             ? Colors.transparent
             : Get.theme.colorScheme.primary.withValues(alpha: 0.08),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12).w,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.all(10).w,
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Get.theme.colorScheme.primary.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 item.icon,
-                size: 22.r,
+                size: 22,
                 color: Get.theme.colorScheme.primary,
               ),
             ),
@@ -145,9 +144,9 @@ class _NotificationTile extends StatelessWidget {
             if (!item.isRead) ...[
               8.horizontalSpace,
               Container(
-                width: 8.r,
-                height: 8.r,
-                margin: EdgeInsets.only(top: 4.h),
+                width: 8,
+                height: 8,
+                margin: const EdgeInsets.only(top: 4),
                 decoration: BoxDecoration(
                   color: Get.theme.colorScheme.primary,
                   shape: BoxShape.circle,

@@ -1,19 +1,15 @@
 import 'package:base_project_getx/app/modules/onboarding/controllers/onboarding_controller.dart';
 import 'package:base_project_getx/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
 Widget _buildTestWidget() {
-  return ScreenUtilInit(
-    designSize: const Size(428, 926),
-    child: GetMaterialApp(
-      home: const OnboardingView(),
-      initialBinding: BindingsBuilder(() {
-        Get.put(OnboardingController());
-      }),
-    ),
+  return GetMaterialApp(
+    home: const OnboardingView(),
+    initialBinding: BindingsBuilder(() {
+      Get.put(OnboardingController());
+    }),
   );
 }
 

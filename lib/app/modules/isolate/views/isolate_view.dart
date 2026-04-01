@@ -3,7 +3,6 @@ import 'package:base_project_getx/app/modules/isolate/widgets/w_segment_products
 import 'package:base_project_getx/app/widgets/w_keep_alive.dart';
 import 'package:base_project_getx/app/widgets/w_keyboard_dismiss.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/p_appbar_transparency.dart';
@@ -22,14 +21,14 @@ class IsolateView extends GetView<IsolateController> {
             () => CupertinoSegmentedControl<int>(
               children: {
                 0: Padding(
-                  padding: EdgeInsets.all(8).r,
+                  padding: const EdgeInsets.all(8),
                   child: Text(
                     "Users",
                     style: Get.textTheme.tsTitle,
                   ),
                 ),
                 1: Padding(
-                  padding: EdgeInsets.all(8).r,
+                  padding: const EdgeInsets.all(8),
                   child: Text(
                     "Products",
                     style: Get.textTheme.tsTitle,

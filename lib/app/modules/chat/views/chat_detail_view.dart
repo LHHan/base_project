@@ -1,7 +1,6 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/modules/chat/models/chat_message.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -22,7 +21,7 @@ class ChatDetailView extends GetView<ChatDetailController> {
             child: Obx(() => ListView.builder(
                   controller: controller.scrollController,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   itemCount: controller.messages.length,
                   itemBuilder: (context, index) {
                     final msg = controller.messages[index];
@@ -43,21 +42,21 @@ class ChatDetailView extends GetView<ChatDetailController> {
           Obx(() {
             if (!controller.isTyping.value) return const SizedBox.shrink();
             return Padding(
-              padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 4.h),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
               child: Row(
                 children: [
                   CircleAvatar(
-                    radius: 14.r,
+                    radius: 14,
                     backgroundImage: NetworkImage(controller.user.image),
                     onBackgroundImageError: (_, __) {},
                   ),
                   10.horizontalSpace,
                   Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                     decoration: BoxDecoration(
                       color: Get.theme.colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(18.r),
+                      borderRadius: BorderRadius.circular(18),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -91,7 +90,7 @@ class ChatDetailView extends GetView<ChatDetailController> {
           Stack(
             children: [
               CircleAvatar(
-                radius: 20.r,
+                radius: 20,
                 backgroundImage: NetworkImage(controller.user.image),
                 onBackgroundImageError: (_, __) {},
               ),
@@ -99,8 +98,8 @@ class ChatDetailView extends GetView<ChatDetailController> {
                 right: 0,
                 bottom: 0,
                 child: Container(
-                  width: 10.r,
-                  height: 10.r,
+                  width: 10,
+                  height: 10,
                   decoration: BoxDecoration(
                     color: const Color(0xFF4CAF50),
                     shape: BoxShape.circle,
@@ -166,9 +165,9 @@ class _MessageBubble extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        bottom: 4.h,
-        left: isMe ? 48.w : 0,
-        right: isMe ? 0 : 48.w,
+        bottom: 4,
+        left: isMe ? 48 : 0,
+        right: isMe ? 0 : 48,
       ),
       child: Row(
         mainAxisAlignment:
@@ -179,12 +178,12 @@ class _MessageBubble extends StatelessWidget {
           if (!isMe) ...[
             if (showAvatar)
               CircleAvatar(
-                radius: 14.r,
+                radius: 14,
                 backgroundImage: NetworkImage(avatarUrl),
                 onBackgroundImageError: (_, __) {},
               )
             else
-              SizedBox(width: 28.r),
+              const SizedBox(width: 28),
             8.horizontalSpace,
           ],
 
@@ -194,18 +193,20 @@ class _MessageBubble extends StatelessWidget {
                 isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               Container(
-                constraints: BoxConstraints(maxWidth: 0.65.sw),
-                padding: EdgeInsets.symmetric(
-                    horizontal: 14.w, vertical: 10.h),
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.sizeOf(context).width * 0.65,
+                ),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 14, vertical: 10),
                 decoration: BoxDecoration(
                   color: isMe
                       ? Get.theme.colorScheme.primary
                       : Get.theme.colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(18.r),
-                    topRight: Radius.circular(18.r),
-                    bottomLeft: Radius.circular(isMe ? 18.r : 4.r),
-                    bottomRight: Radius.circular(isMe ? 4.r : 18.r),
+                    topLeft: const Radius.circular(18),
+                    topRight: const Radius.circular(18),
+                    bottomLeft: Radius.circular(isMe ? 18 : 4),
+                    bottomRight: Radius.circular(isMe ? 4 : 18),
                   ),
                 ),
                 child: Text(
@@ -243,7 +244,7 @@ class _InputBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.fromLTRB(12.w, 8.h, 12.w, 8.h),
+        padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
         decoration: BoxDecoration(
           color: Get.theme.scaffoldBackgroundColor,
           border: Border(
@@ -259,7 +260,7 @@ class _InputBar extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: Get.theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(24.r),
+                  borderRadius: BorderRadius.circular(24),
                 ),
                 child: TextField(
                   controller: textController,
@@ -270,8 +271,8 @@ class _InputBar extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: 'Message...',
                     hintStyle: Get.textTheme.tsSubTitle,
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16.w, vertical: 10.h),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     border: InputBorder.none,
                   ),
                   onSubmitted: (_) => onSend(),
@@ -282,8 +283,8 @@ class _InputBar extends StatelessWidget {
             GestureDetector(
               onTap: onSend,
               child: Container(
-                width: 44.r,
-                height: 44.r,
+                width: 44,
+                height: 44,
                 decoration: BoxDecoration(
                   color: Get.theme.colorScheme.primary,
                   shape: BoxShape.circle,
@@ -291,7 +292,7 @@ class _InputBar extends StatelessWidget {
                 child: Icon(
                   Icons.send_rounded,
                   color: Get.theme.colorScheme.onPrimary,
-                  size: 20.r,
+                  size: 20,
                 ),
               ),
             ),
@@ -342,9 +343,9 @@ class _TypingDotState extends State<_TypingDot>
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, __) => Container(
-        width: 7.r,
-        height: 7.r,
-        margin: EdgeInsets.symmetric(horizontal: 2.w),
+        width: 7,
+        height: 7,
+        margin: const EdgeInsets.symmetric(horizontal: 2),
         decoration: BoxDecoration(
           color: Get.theme.colorScheme.onSurfaceVariant
               .withValues(alpha: 0.4 + 0.6 * _animation.value),

@@ -1,6 +1,5 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class WSettingItem extends StatelessWidget {
@@ -31,7 +30,7 @@ class WSettingItem extends StatelessWidget {
       ),
       subtitle: subTitle != null
           ? Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0).w,
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
               child: Text(
                 subTitle ?? '',
                 style: Get.textTheme.tsSubTitle,

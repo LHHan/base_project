@@ -8,7 +8,6 @@ import 'package:base_project_getx/app/modules/setting/widgets/w_setting_toggle_i
 import 'package:base_project_getx/app/widgets/p_appbar_transparency.dart';
 import 'package:base_project_getx/app/widgets/w_frosted_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../controllers/setting_controller.dart';
@@ -16,7 +15,7 @@ import '../controllers/setting_controller.dart';
 class SettingView extends GetView<SettingController> {
   const SettingView({super.key});
 
-  static final _kContentPadding = EdgeInsets.symmetric(horizontal: 10.w);
+  static final _kContentPadding = const EdgeInsets.symmetric(horizontal: 10);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class SettingView extends GetView<SettingController> {
                 // Large title + account info
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -44,7 +43,7 @@ class SettingView extends GetView<SettingController> {
                           'screenNameSettings'.tr,
                           style: Get.textTheme.tsPageName,
                         ),
-                        SizedBox(height: 16.h),
+                        const SizedBox(height: 16),
                         WSettingAccountInfo(
                           avatar: AppAssets().imDog,
                           name: 'Le Hoang Han',
@@ -58,9 +57,9 @@ class SettingView extends GetView<SettingController> {
                 SliverPadding(
                   padding: EdgeInsets.fromLTRB(
                     _kContentPadding.horizontal / 2,
-                    4.h,
+                    4,
                     _kContentPadding.horizontal / 2,
-                    AppConstant().kBottomNavigationBarHeight.h + 24.h,
+                    AppConstant().kBottomNavigationBarHeight + 24,
                   ),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
@@ -90,7 +89,7 @@ class SettingView extends GetView<SettingController> {
                         ],
                       ),
 
-                      SizedBox(height: 24.h),
+                      const SizedBox(height: 24),
 
                       // -------------------------------------------------------
                       // Notifications
@@ -126,7 +125,7 @@ class SettingView extends GetView<SettingController> {
                         ],
                       ),
 
-                      SizedBox(height: 24.h),
+                      const SizedBox(height: 24),
 
                       // -------------------------------------------------------
                       // Account
@@ -157,7 +156,7 @@ class SettingView extends GetView<SettingController> {
                         ],
                       ),
 
-                      SizedBox(height: 24.h),
+                      const SizedBox(height: 24),
 
                       // -------------------------------------------------------
                       // Storage & Data
@@ -184,7 +183,7 @@ class SettingView extends GetView<SettingController> {
                         ],
                       ),
 
-                      SizedBox(height: 24.h),
+                      const SizedBox(height: 24),
 
                       // -------------------------------------------------------
                       // About
@@ -232,7 +231,7 @@ class SettingView extends GetView<SettingController> {
                         ],
                       ),
 
-                      SizedBox(height: 24.h),
+                      const SizedBox(height: 24),
 
                       // -------------------------------------------------------
                       // Learning (demo)
@@ -249,7 +248,7 @@ class SettingView extends GetView<SettingController> {
                         ],
                       ),
 
-                      SizedBox(height: 16.h),
+                      const SizedBox(height: 16),
                     ]),
                   ),
                 ),

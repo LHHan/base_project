@@ -1,6 +1,5 @@
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../controllers/profile_controller.dart';
@@ -40,12 +39,12 @@ class ProfileView extends GetView<ProfileController> {
         }
 
         return SingleChildScrollView(
-          padding: const EdgeInsets.all(16).w,
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               24.verticalSpace,
               CircleAvatar(
-                radius: 52.r,
+                radius: 52,
                 backgroundImage: NetworkImage(user.image),
                 onBackgroundImageError: (_, __) {},
               ),
@@ -126,7 +125,7 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10).w,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -2,7 +2,6 @@ import 'package:base_project_getx/app/core/utils/app_asset.dart';
 import 'package:base_project_getx/app/core/utils/app_extension.dart';
 import 'package:base_project_getx/app/widgets/w_dashed_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class WBottomNavBarDynamic extends StatelessWidget {
@@ -25,13 +24,13 @@ class WBottomNavBarDynamic extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,
-        margin: EdgeInsets.symmetric(horizontal: 20).r,
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15).r,
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
         decoration: BoxDecoration(
           color: showLogout
               ? Get.theme.colorScheme.error
               : const Color(0xFF1A1A2E),
-          borderRadius: BorderRadius.circular(50.r),
+          borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
               color: Colors.purple.withValues(alpha: 0.4),
@@ -87,7 +86,7 @@ class WBottomNavBarDynamic extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           /// Icon
-          Icon(Icons.logout, color: Colors.white, size: 28.r),
+          const Icon(Icons.logout, color: Colors.white, size: 28),
 
           10.horizontalSpace,
 
@@ -111,9 +110,9 @@ class WBottomNavBarDynamic extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        padding: EdgeInsets.all(2.r),
+        padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(16),
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -127,23 +126,23 @@ class WBottomNavBarDynamic extends StatelessWidget {
         ),
         child: WDashedBox(
           color: isSelected ? const Color(0xFFA020F0) : const Color(0xFFB0BEC5),
-          dashWidth: 6.r,
-          dashSpace: 4.r,
-          strokeWidth: 2.r,
-          borderRadius: 14.r,
+          dashWidth: 6,
+          dashSpace: 4,
+          strokeWidth: 2,
+          borderRadius: 14,
           child: AnimatedScale(
             scale: isSelected ? 1.25 : 1.0,
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeInOut,
             child: CircleAvatar(
-              radius: isSelected ? 16.r : 14.r,
+              radius: isSelected ? 16 : 14,
               backgroundImage: isAvatar ? AssetImage(AppAssets().imDog) : null,
               backgroundColor: Colors.transparent,
               child: isAvatar
                   ? null
                   : Icon(
                       icon,
-                      size: 28.r,
+                      size: 28,
                       color: const Color(0xFFC0C0C0),
                     ),
             ),
