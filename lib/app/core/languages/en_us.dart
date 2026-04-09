@@ -2,6 +2,10 @@ const Map<String, String> en = {
   /// #region screen name
   'screenNameSettings': 'Settings',
   'screenNameHome': 'Home',
+  'screenNameFeed': 'Feed',
+  'screenNameChats': 'Chats',
+  'screenNameNotifications': 'Notifications',
+  'screenNameProfile': 'Profile',
 
   /// #region label
   'labelAccount': 'Account',

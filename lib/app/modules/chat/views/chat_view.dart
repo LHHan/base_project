@@ -20,7 +20,7 @@ class ChatView extends GetView<ChatController> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-                child: Text('Chats', style: Get.textTheme.tsPageName),
+                child: Text('screenNameChats'.tr, style: Get.textTheme.tsPageName),
               ),
               Expanded(
                 child: Obx(() {

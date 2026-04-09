@@ -23,7 +23,7 @@ class NotificationsView extends GetView<NotificationsController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Notifications',
+                      'screenNameNotifications'.tr,
                       style: Get.textTheme.tsPageName,
                     ),
                     Obx(() {

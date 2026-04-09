@@ -2,6 +2,10 @@ const Map<String, String> ja = {
   /// #region screen name
   'screenNameSettings': '設定',
   'screenNameHome': 'ホーム',
+  'screenNameFeed': 'フィード',
+  'screenNameChats': 'チャット',
+  'screenNameNotifications': '通知',
+  'screenNameProfile': 'プロフィール',
 
   /// #region label
   'labelAccount': 'アカウント',

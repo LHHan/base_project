@@ -20,7 +20,7 @@ class FeedView extends GetView<FeedController> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Text('Feed', style: Get.textTheme.tsPageName),
+                child: Text('screenNameFeed'.tr, style: Get.textTheme.tsPageName),
               ),
               Expanded(
                 child: Obx(() {

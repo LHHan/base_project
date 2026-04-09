@@ -2,6 +2,10 @@ const Map<String, String> vi = {
   /// #region screen name
   'screenNameSettings': 'Cài đặt',
   'screenNameHome': 'Trang chủ',
+  'screenNameFeed': 'Bảng tin',
+  'screenNameChats': 'Tin nhắn',
+  'screenNameNotifications': 'Thông báo',
+  'screenNameProfile': 'Hồ sơ',
 
   /// #region label
   'labelAccount': 'Tài khoản',
